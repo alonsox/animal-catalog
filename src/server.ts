@@ -1,9 +1,7 @@
 import 'dotenv/config';
 import { app } from './app';
-import { configuracionApp } from './app.config';
+import { appConfig } from './app.config';
 
-app.listen(configuracionApp.port, () => {
-  console.log(
-    `Server running at http://www.localhost:${configuracionApp.port}`,
-  );
+app.listen(appConfig.port, () => {
+  console.log(`Server running at http://www.localhost:${appConfig.port}`);
 });
