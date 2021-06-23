@@ -39,7 +39,7 @@ export async function enviarCorreo(infoCorreo: DatosCorreo): Promise<void> {
  * Envia un correo completando una plantilla.
  */
 export async function enviarCorreoConPlantilla<T>(
-  infoCorreo: DatosCorreo,
+  infoCorreo: Omit<DatosCorreo, 'cuerpo'>,
   plantilla: string,
   data: T,
 ): Promise<void> {

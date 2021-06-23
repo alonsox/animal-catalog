@@ -1,7 +1,4 @@
-interface AppConfig {
-  port: number;
-}
-
-export const appConfig: AppConfig = {
+export const configuracionApp = {
   port: parseInt(process.env.PORT || '3000', 10),
-}
+  urlApp: process.env.APP_URL as string,
+};
