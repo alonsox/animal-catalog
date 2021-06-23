@@ -1,0 +1,9 @@
+build
+node_modules
+jest.config.js
+
+# This does not ignores json files recursively
+*.json
+
+
+

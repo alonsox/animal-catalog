@@ -1,0 +1,33 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "import"
+ ],
+  "extends": [
+    "airbnb-typescript",
+    "prettier",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
+  ], 
+  "parserOptions": {
+    "project": "tsconfig.lint.json",
+    "sourceType": "module"
+  }, 
+  "settings": {
+    "react": {
+      "version": "999.999.999"
+    }
+  },
+  "rules": {
+    "no-console": "off",
+    "import/prefer-default-export": "off",
+    "array-callback-return": "off",
+    "no-underscore-dangle": "off",
+    "lines-between-class-members": "off",
+    "@typescript-eslint/lines-between-class-members": ["off"]
+  }
+}

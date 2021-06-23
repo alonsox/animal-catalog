@@ -1,0 +1,9 @@
+// Configuration file used for linting
+{
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts",
+  ]
+}
