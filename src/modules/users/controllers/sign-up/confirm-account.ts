@@ -1,44 +1,50 @@
-// const { confirmAccount } = require('../use-cases/create-user');
-// const { isAccountConfirmedInfo } = require('../use-cases/create-user');
+import { NextFunction, Request, Response } from 'express';
+import { confirmAccount } from '../../use-cases/create-user';
 
-// export const checkAccountConfirmation = async (req, res, next) => {
-//   const { confirmationCode } = req.params;
+export async function checkAccountConfirmation(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  const { confirmationCode } = req.params;
 
-//   if (!confirmationCode) {
-//     res.render('sign-up-confirmation-error', {
-//       title: 'Error de confirmación',
-//     });
-//     return;
-//   }
+  if (!confirmationCode) {
+    renderConfirmationError(res);
+    return;
+  }
 
-//   try {
-//     const result = await confirmAccount(confirmationCode);
+  try {
+    const result = await confirmAccount(confirmationCode);
 
-//     if (!isAccountConfirmedInfo(result)) {
-//       throw result; // Is an error
-//     }
+    const { wasAlreadyActive, user } = result;
+    renderConfirmationSuccess(res, {
+      name: user.firstName,
+      wasAlreadyActive,
+    });
+  } catch (err) {
+    renderConfirmationError(res);
+    next(err);
+  }
+}
 
-//     const { wasAlreadyActive, user } = result;
-//     renderConfirmationSuccess(res, {
-//       name: user.firstName,
-//       isConfirmedAlready: wasAlreadyActive,
-//     });
-//   } catch (err) {
-//     renderConfirmationError(res);
-//     next(err);
-//   }
-// };
+interface ConfirmationSuccessTemplate {
+  name: string;
+  wasAlreadyActive: boolean;
+}
 
-// function renderConfirmationSuccess(res, data) {
-//   res.render('sign-up-confirmation-success', {
-//     title: '¡Felicidades!',
-//     name: data.name || 'No name provided',
-//     isConfirmedAlready: data.isConfirmedAlready || false,
-//   });
-// }
+function renderConfirmationSuccess(
+  res: Response,
+  data: ConfirmationSuccessTemplate,
+) {
+  res.render('sign-up/account-confirmation-success', {
+    title: 'Congratulations',
+    name: data.name || 'No name provided',
+    wasAlreadyActive: data.wasAlreadyActive || false,
+  });
+}
 
-// function renderConfirmationError(res) {
-//   res.render('sign-up-confirmation-error', {
-//     title: 'Error',
-//   });
-// }
+function renderConfirmationError(res: Response) {
+  res.render('sign-up/account-confirmation-error', {
+    title: 'Account Confirmation Error',
+  });
+}

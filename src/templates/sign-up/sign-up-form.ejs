@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head-content.ejs') %>
+  </head>
+  <body>
+    <%- include('../partials/navbar.ejs') %>
+    <div class="container-lg py-4" style="max-width: 500px">
+      <form action="" method="post" class="border px-3 py-4 rounded">
+        <h1 class="text-center">Sign Up</h1>
+        <!-- <p class="text-center mt-4">
+          Sign Up and checkout
+        </p> -->
+        <div class="form-group">
+          <%# NAME %>
+          <label class="text-secondary" for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            value="<%= firstName %>"
+            class="form-control <% if (errors.firstName) { %>is-invalid<% } %>"
+          />
+          <div class="invalid-feedback"><%= errors.firstName %></div>
+        </div>
+        <%# LAST NAME %>
+        <div class="form-group">
+          <label class="text-secondary" for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            value="<%= lastName %>"
+            class="form-control <% if (errors.lastName) { %>is-invalid<% } %>"
+          />
+          <div class="invalid-feedback"><%= errors.lastName %></div>
+        </div>
+        <%# EMAIL %>
+        <div class="form-group">
+          <label class="text-secondary" for="email">Email</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            value="<%= email %>"
+            class="form-control <% if (errors.email) { %>is-invalid<% } %>"
+          />
+          <div class="invalid-feedback"><%= errors.email %></div>
+        </div>
+        <%# USERNAME %>
+        <div class="form-group">
+          <label class="text-secondary" for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value="<%= username %>"
+            class="form-control <% if (errors.username) { %>is-invalid<% } %>"
+          />
+          <div class="invalid-feedback"><%= errors.username %></div>
+        </div>
+        <%# PASSWORD %>
+        <div class="form-group">
+          <label class="text-secondary" for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control <% if (errors.password) { %>is-invalid<% } %>"
+          />
+          <div class="invalid-feedback"><%= errors.password %></div>
+        </div>
+        <%# PASSWORD CONFIRMATION %>
+        <div class="form-group">
+          <label class="text-secondary" for="pwdConfirmation"
+            >Confirm Password</label
+          >
+          <input
+            type="password"
+            id="pwdConfirmation"
+            name="pwdConfirmation"
+            class="form-control <% if (errors.pwdConfirmation) { %>is-invalid<% } %>"
+          />
+          <div class="invalid-feedback"><%= errors.pwdConfirmation %></div>
+        </div>
+        <button type="submit" class="btn btn-block btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </body>
+</html>

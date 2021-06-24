@@ -1,0 +1,33 @@
+<nav
+  class="navbar navbar-dark bg-primary navbar-expand-sm justify-content-between"
+>
+  <div class="container-lg">
+    <a href="/" class="navbar-brand">Animal Catalog</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNavDropdown"
+    >
+      <span class="navbar-toggler-icon p-0" style="font-size: 14px"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <nav class="navbar-nav ml-auto">
+        <%# if (!currentUser) { %>
+        <a
+          href="/auth/log-in"
+          type="button"
+          class="btn btn-sm btn-outline-light nav-item mx-1 my-1"
+          >Log In</a
+        >
+        <a
+          href="/users/sign-up"
+          type="button"
+          class="btn btn-sm btn-outline-light nav-item mx-1 my-1"
+          >Sign Up</a
+        >
+        <%# } %>
+      </nav>
+    </div>
+  </div>
+</nav>

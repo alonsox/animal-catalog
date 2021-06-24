@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head-content.ejs') %>
+  </head>
+  <body>
+    <%- include('../partials/navbar.ejs') %>
+
+    <div class="container-lg py-4 text-center" style="max-width: 500px">
+      <%if (wasAlreadyActive) { %> <%# ACCOUNT ALREADY CONFIRMED %>
+      <h1>Hi <%= name %></h1>
+      <p>Your account is already active</p>
+      <% } else { %> <%# ACCOUNT NOT CONFIRMED %>
+      <h1>Hi <%= name %></h1>
+      <p>Your account has been activated</p>
+      <% } %>
+      <div class="row">
+        <div class="col text-center">
+          <a
+            href="/auth/log-in"
+            class="btn btn-primary text-center"
+            role="button"
+            >Log In
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

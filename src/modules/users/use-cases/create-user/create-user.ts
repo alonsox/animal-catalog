@@ -53,7 +53,7 @@ async function sendConfirmationEmail(user: UserDocument) {
   await sendEmailWithTemplate<DatosCorreoNuevaCuenta>(
     {
       to: user.email,
-      subject: '[Animal Catalog] ACcount Confirmation',
+      subject: '[Animal Catalog] Account Confirmation',
     },
     'account-confirmation',
     {

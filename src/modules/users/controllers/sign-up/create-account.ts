@@ -26,7 +26,7 @@ export async function createNewAccount(
   // Send to page of confirmation
   showConfirmationPending(res, {
     name: newUser.firstName,
-    email: newUser.lastName,
+    email: newUser.email,
   });
 }
 
@@ -35,7 +35,7 @@ export async function createNewAccount(
 //   lastName: string;
 //   email: string;
 //   username: string;
-//   errors: string;
+//   errors: object;
 // }
 
 function renderSignUpForm(res: Response, data: any = {}) {
@@ -51,7 +51,7 @@ function renderSignUpForm(res: Response, data: any = {}) {
 }
 
 function showConfirmationPending(res: Response, data: any = {}) {
-  res.render('sign-up/sign-up-not-confirmed', {
+  res.render('sign-up/account-confirmation-pending', {
     title: 'Sign Up',
     name: data.name || 'No named provided',
     email: data.email || 'Not email provided',

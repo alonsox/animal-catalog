@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 /*
  * ROUTES
  */
-app.get('/', (_, res) => res.render('home'));
+app.get('/', (_, res) => res.render('home', { title: 'Animal Catalog' }));
 app.use('/users', usersRoutes);
 
 export { app };
