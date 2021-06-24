@@ -6,7 +6,7 @@ import { User, UserDocument } from '../../models/user';
 import { hashPwd } from './hash-password';
 import { createSecurityCode } from './confirmation-code';
 
-interface DatosCorreoNuevaCuenta {
+interface NewAccountEmailData {
   /** The name of the user to personalize the email */
   name: string;
 
@@ -15,8 +15,6 @@ interface DatosCorreoNuevaCuenta {
 }
 
 export async function createUser(infoUsuario: CreateUserDto): Promise<UserDto> {
-  // TODO: Add validation here
-
   // Create and save user
   const newUser = await createUserDocument(infoUsuario);
   await newUser.save();
@@ -50,7 +48,7 @@ async function sendConfirmationEmail(user: UserDocument) {
   const { urlApp } = appConfig;
   const confirmationLink = `${urlApp}/users/sign-up/${user.confirmationCode}`;
 
-  await sendEmailWithTemplate<DatosCorreoNuevaCuenta>(
+  await sendEmailWithTemplate<NewAccountEmailData>(
     {
       to: user.email,
       subject: '[Animal Catalog] Account Confirmation',

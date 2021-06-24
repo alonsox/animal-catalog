@@ -1,5 +1,8 @@
-import { Request, Response } from 'express';
+import { validationResult } from 'express-validator';
+import { NextFunction, Request, Response } from 'express';
 import { createUser } from '../../use-cases/create-user';
+import { getErrorMessages } from '../../../shared/utils';
+import { SignUpErrors } from '../../validators/sign-up';
 
 export function showSignUpForm(req: Request, res: Response) {
   if (req.user) {
@@ -13,32 +16,49 @@ export function showSignUpForm(req: Request, res: Response) {
 export async function createNewAccount(
   req: Request,
   res: Response,
-  // next: NextFunction,
+  next: NextFunction,
 ) {
-  if (req.user) {
-    res.redirect('/');
-    return;
+  try {
+    if (req.user) {
+      res.redirect('/');
+      return;
+    }
+
+    // VALIDATE INPUT
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      renderSignUpForm(res, {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        username: req.body.username,
+        errors: getErrorMessages<SignUpErrors>(errors),
+      });
+      return;
+    }
+
+    // CREATE USER
+    const newUser = await createUser(req.body);
+
+    // Send to page of confirmation
+    showConfirmationPending(res, {
+      name: newUser.firstName,
+      email: newUser.email,
+    });
+  } catch (err) {
+    next(err);
   }
-
-  // CREATE USER
-  const newUser = await createUser(req.body);
-
-  // Send to page of confirmation
-  showConfirmationPending(res, {
-    name: newUser.firstName,
-    email: newUser.email,
-  });
 }
 
-// interface DatosNuevaCuenta {
-//   title: string;
-//   lastName: string;
-//   email: string;
-//   username: string;
-//   errors: object;
-// }
+interface SignUpFormData {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  username?: string;
+  errors?: SignUpErrors;
+}
 
-function renderSignUpForm(res: Response, data: any = {}) {
+function renderSignUpForm(res: Response, data: SignUpFormData = {}) {
   // Render sign up form
   res.render('sign-up/sign-up-form', {
     title: 'Sign Up',
@@ -50,7 +70,15 @@ function renderSignUpForm(res: Response, data: any = {}) {
   });
 }
 
-function showConfirmationPending(res: Response, data: any = {}) {
+interface ConfirmationPendindData {
+  name?: string;
+  email?: string;
+}
+
+function showConfirmationPending(
+  res: Response,
+  data: ConfirmationPendindData = {},
+) {
   res.render('sign-up/account-confirmation-pending', {
     title: 'Sign Up',
     name: data.name || 'No named provided',
