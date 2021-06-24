@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head-content.ejs') %>
+  </head>
+  <body>
+    <%- include('../partials/navbar.ejs') %>
+
+    <div class="container-lg py-4" style="max-width: 500px">
+      <form action="" method="post" class="border px-3 py-3 rounded">
+        <h1 class="text-center mb-4">Login</h1>
+        <%# USERNAME %>
+        <div class="form-group">
+          <label class="text-secondary" for="loginField">Username</label>
+          <input
+            type="text"
+            id="loginField"
+            name="loginField"
+            autocomplete="off"
+            value="<%= loginField %>"
+            class="form-control <% if (errors.loginField) { %>is-invalid<% } %>"
+          />
+          <div class="invalid-feedback"><%= errors.loginField %></div>
+        </div>
+        <%# PASSWORD %>
+        <div class="form-group">
+          <label class="text-secondary" for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control <% if (errors.password) { %>is-invalid<% } %>"
+          />
+          <div class="invalid-feedback"><%= errors.password %></div>
+        </div>
+        <!-- GENERAL ERROR MESSAGE -->
+        <p class="mt-4 text-center text-danger"><%= errorMsg %></p>
+        <%# LOGIN BUTTON %>
+        <button type="submit" class="btn btn-block btn-primary mt-5">
+          Log In
+        </button>
+        <%# PASSWORD RESET %>
+        <div class="form-group mt-3">
+          <p class="text-secondary text-center">
+            <a href="/users/pwd-reset">Forgot your password?</a>
+          </p>
+        </div>
+        <%# NOT ACCOUNT SEGMENT %>
+        <div class="form-group mt-3">
+          <p class="text-secondary">
+            Don't have an account yet? Don't worry,
+            <a href="/users/sign-up">sign up</a> right now.
+          </p>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

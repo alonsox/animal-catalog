@@ -1,7 +1,7 @@
 import { User, UserDocument } from '../../models/user';
+import { userDocumentToDto } from '../../utils';
 import { AccountConfirmationDto } from './account.confirmation-dto';
 import { checkConfirmationCode } from './confirmation-code';
-import { userDocumentToDto } from './user-dto';
 
 const errorMessages = {
   noConfirmationCode: 'There is no confirmation code',

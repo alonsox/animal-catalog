@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { usersConfig } from '../../users.config';
+import { usersConfig } from '../users.config';
 
 export function hashPwd(pwd: string): Promise<string> {
   return bcrypt

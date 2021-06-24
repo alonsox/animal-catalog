@@ -13,7 +13,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <nav class="navbar-nav ml-auto">
-        <%# if (!currentUser) { %>
+        <% if (!currentUser) { %>
         <a
           href="/auth/log-in"
           type="button"
@@ -26,7 +26,14 @@
           class="btn btn-sm btn-outline-light nav-item mx-1 my-1"
           >Sign Up</a
         >
-        <%# } %>
+        <% } else { %>
+        <a
+          href="/auth/log-out"
+          type="button"
+          class="btn btn-sm btn-outline-light nav-item mx-1 my-1"
+          >Log Out</a
+        >
+        <% } %>
       </nav>
     </div>
   </div>

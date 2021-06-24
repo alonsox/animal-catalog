@@ -1,9 +1,9 @@
 import { appConfig } from '../../../../app.config';
 import { sendEmailWithTemplate } from '../../../notifications/email';
 import { CreateUserDto } from './create-user-dto';
-import { userDocumentToDto, UserDto } from './user-dto';
+import { userDocumentToDto, UserDto } from '../../utils';
 import { User, UserDocument } from '../../models/user';
-import { hashPwd } from './hash-password';
+import { hashPwd } from '../../utils/hash-password';
 import { createSecurityCode } from './confirmation-code';
 
 interface NewAccountEmailData {

@@ -1,4 +1,4 @@
-import { UserDocument } from '../../models/user';
+import { UserDocument } from '../models/user';
 
 interface UserDtoProps {
   id: string;
