@@ -12,6 +12,7 @@ import {
   handleUpdateCategory,
   showUpdateCategoryForm,
 } from '../controllers/category/update-category.controller';
+import { showCategoryDetails } from '../controllers/category/get-category.controller';
 
 const wip = (req: any, res: any) => res.send('Work In Progress');
 
@@ -22,7 +23,7 @@ const animalRoutes = Router();
  */
 animalRoutes.route(categoryRoutes.getAll).get(wip);
 
-animalRoutes.route(categoryRoutes.getSingle).get(wip);
+animalRoutes.route(categoryRoutes.getSingle).get(showCategoryDetails);
 
 animalRoutes
   .route(categoryRoutes.create)
