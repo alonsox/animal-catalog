@@ -3,9 +3,10 @@ import { animalConstants } from './animal-constants';
 import { categoryConstants } from '../category';
 import { familyConstants } from '../family';
 import { conservationStatusConstants } from '../conservation-status';
+import { AnimalDocument, AnimalModel } from './animal-types';
 
 // SCHEMA
-const animalSchema = new Schema({
+const animalSchema = new Schema<AnimalDocument, AnimalModel>({
   name: { type: String },
   scientificName: { type: String },
   description: { type: String },
@@ -25,7 +26,7 @@ const animalSchema = new Schema({
 });
 
 // MODEL
-export const Animal = model(
+export const Animal = model<AnimalDocument, AnimalModel>(
   animalConstants.modelName,
   animalSchema,
   animalConstants.collectionName,
