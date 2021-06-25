@@ -5,11 +5,14 @@ import { getErrorMessages } from '../../../shared/utils';
 import { categoryRoutes, fullRouteOf } from '../../routes/routes.config';
 import { createCategory } from '../../use-cases/category/create-category';
 import { CategoryValidationErrors } from '../../validators/category.validators';
+import { renderCategoryForm } from './shared';
+
+const formTitle = 'Create Category';
 
 // Displays the category create form on GET
-export async function showCategoryForm(req: Request, res: Response) {
+export async function showCreateCategoryForm(req: Request, res: Response) {
   renderCategoryForm(res, {
-    formTitle: 'Create Category',
+    formTitle,
   });
 }
 
@@ -23,7 +26,7 @@ export async function handleCreateCategory(
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     renderCategoryForm(res, {
-      formTitle: 'Create Category',
+      formTitle,
       name: req.body.name,
       description: req.body.description,
       errors: getErrorMessages<CategoryValidationErrors>(errors),
@@ -38,25 +41,9 @@ export async function handleCreateCategory(
       description: req.body.description,
     });
 
+    // TODO: redirect to category details
     res.redirect(fullRouteOf(categoryRoutes.getAll));
   } catch (err: any) {
     next(new UnknownError('Unknown error while creating a category', err));
   }
-}
-
-interface CategoryFormData {
-  formTitle?: string; // Update or create
-  name?: string; // Category name
-  description?: string; // Category description
-  errors?: CategoryValidationErrors;
-}
-
-function renderCategoryForm(res: Response, data: CategoryFormData = {}) {
-  res.render('animals/category/category-form', {
-    title: data.formTitle,
-    formTitle: data.formTitle || '',
-    name: data.name || '',
-    description: data.description || '',
-    errors: data.errors || {},
-  });
 }

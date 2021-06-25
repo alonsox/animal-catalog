@@ -1,10 +1,17 @@
 import { Router } from 'express';
 import { categoryRoutes } from './routes.config';
-import { validateCreateCategory } from '../validators/category.validators';
+import {
+  validateCreateCategory,
+  validateUpdateCategory,
+} from '../validators/category.validators';
 import {
   handleCreateCategory,
-  showCategoryForm,
+  showCreateCategoryForm,
 } from '../controllers/category/create-category.controller';
+import {
+  handleUpdateCategory,
+  showUpdateCategoryForm,
+} from '../controllers/category/update-category.controller';
 
 const wip = (req: any, res: any) => res.send('Work In Progress');
 
@@ -19,10 +26,13 @@ animalRoutes.route(categoryRoutes.getSingle).get(wip);
 
 animalRoutes
   .route(categoryRoutes.create)
-  .get(showCategoryForm)
+  .get(showCreateCategoryForm)
   .post(validateCreateCategory(), handleCreateCategory);
 
-animalRoutes.route(categoryRoutes.update).get(wip).post(wip);
+animalRoutes
+  .route(categoryRoutes.update)
+  .get(showUpdateCategoryForm)
+  .post(validateUpdateCategory(), handleUpdateCategory);
 
 animalRoutes.route(categoryRoutes.delete).post(wip);
 

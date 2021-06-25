@@ -65,22 +65,20 @@ export function validateUpdateCategory() {
     ...baseValidators,
     // NAME
     body('name').custom(async (value, { req }) => {
-      // TODO: Check later
-      const existingCategory = await Category.findOne(
-        {
-          name: value.toLowerCase(),
-        },
-        'name',
-      ).exec();
+      const existingCategory = await Category.findOne({
+        name: value.toLowerCase(),
+      }).exec();
 
       if (!existingCategory) {
-        return;
+        return true;
       }
 
-      const categoryBeingUpdatedId = req.body.updatedCategoryId.toString();
-      if (categoryBeingUpdatedId !== existingCategory._id.toString()) {
+      const categoryBeingUpdatedId = req.params?.id;
+      if (categoryBeingUpdatedId !== existingCategory.id.toString()) {
         throw new Error(nameErrors.alreadyExists);
       }
+
+      return true;
     }),
   ];
 }

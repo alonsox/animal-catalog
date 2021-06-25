@@ -6,13 +6,16 @@ import { CategoryNotFoundError } from './errors/category-not-found';
 export async function updateCategory(
   categoryInfo: UpdateCategoryDto,
 ): Promise<CategoryDto | CategoryNotFoundError> {
-  const { id, ...data } = categoryInfo;
+  const { id: categoryId, ...data } = categoryInfo;
+  try {
+    const document = await Category.findByIdAndUpdate(categoryId, data).exec();
 
-  const document = await Category.findByIdAndUpdate(id, data).exec();
+    if (!document) {
+      return new CategoryNotFoundError(categoryId);
+    }
 
-  if (!document) {
-    return new CategoryNotFoundError(categoryInfo.id);
+    return categoryDocumentToDto(document);
+  } catch (err: any) {
+    return new CategoryNotFoundError(categoryId);
   }
-
-  return categoryDocumentToDto(document);
 }
