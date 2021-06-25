@@ -1,0 +1,38 @@
+{{!-- TEMPLATE VARIABLES
+  * title: Title of the page 
+  * category: A category object with the information of the category being deleted
+  * animals: Animals that use this category
+  * errors
+ --}}
+<div class="container-lg my-3">
+
+  {{#if animals.length}}
+    <h1>You cannot delete <mark class="text-info">{{category.name}}</mark> yet.</h1>
+    <p>You <strong>must</strong> delete the following animals before deleteing this category:</p>
+    <div class="list-group">  
+      {{#each animals}}
+        <a 
+          href="{{this.detailsUrl}}" 
+          class="text-primary list-group-item list-group-item-action"
+        >{{this.name}}</a>
+      {{/each}}
+    </div>
+  {{else}}
+    <form action="" method="POST">
+      <h1 class="mb-4">Are you sure you want to delete this category: <mark class="text-info">{{category.name}}</mark>?</h1>
+      <input type="hidden" name="categoryId" value="{{category._id}}">
+      {{!-- Master password --}}
+      <div class="form-group">
+        <label for="pwd">Master Password</label>
+        <input 
+          type="password" 
+          id="pwd" 
+          name="pwd" 
+          class="form-control {{#if errors.pwd}}is-invalid{{/if}}"
+        >
+        <div class="invalid-feedback">{{errors.pwd}}</div>
+      </div>
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+  {{/if}}
+</div>

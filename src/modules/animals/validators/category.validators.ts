@@ -1,6 +1,11 @@
 import { body } from 'express-validator';
 import { Category } from '../models/category';
 
+export interface CategoryValidationErrors {
+  name: string;
+  description: string;
+}
+
 /*
  * ERROR MESSAGES
  */
@@ -25,7 +30,8 @@ const baseValidators = [
     .withMessage(nameErrors.notExists)
     .trim()
     .notEmpty()
-    .withMessage(nameErrors.isEmpty),
+    .withMessage(nameErrors.isEmpty)
+    .toLowerCase(),
 
   // DESCRIPTION
   body('description')
