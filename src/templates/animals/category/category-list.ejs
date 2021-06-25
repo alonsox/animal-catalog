@@ -9,25 +9,25 @@
       <div
         class="d-flex justify-content-between align-items-center flex-wrap my-3"
       >
-        <h1>Our Categories</h1>
+        <h1>All Categories</h1>
         <a
           href="/catalog/categories/new"
           class="text-decoration-none text-white"
         >
-          <button class="btn btn-primary">Add a new category</button>
+          <button class="btn btn-primary">New</button>
         </a>
       </div>
 
       <ul class="list-group">
-        {{#each categories}}
-        <a href="{{ detailsUrl }}" class="text-decoration-none">
+        <% categories.forEach(category => { %>
+        <a href="<%= category.detailsUrl %>" class="text-decoration-none">
           <li
             class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
           >
-            <h3>{{ name }}</h3>
+            <h3><%= category.name %></h3>
             <div>
               <a
-                href="{{ updateUrl }}"
+                href="<%= category.updateUrl %>"
                 class="text-decoration-none text-white mr-2"
               >
                 <button
@@ -36,7 +36,10 @@
                   <i class="material-icons small">edit</i>
                 </button>
               </a>
-              <a href="{{ deleteUrl }}" class="text-decoration-none text-white">
+              <a
+                href="<%= category.deleteUrl %>"
+                class="text-decoration-none text-white"
+              >
                 <button class="btn btn-danger d-inline-flex align-items-center">
                   <i class="material-icons small">delete</i>
                 </button>
@@ -44,7 +47,7 @@
             </div>
           </li>
         </a>
-        {{/each}}
+        <% }) %>
       </ul>
     </div>
   </body>

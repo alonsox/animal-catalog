@@ -13,6 +13,7 @@ import {
   showUpdateCategoryForm,
 } from '../controllers/category/update-category.controller';
 import { showCategoryDetails } from '../controllers/category/get-category.controller';
+import { showAllCategories } from '../controllers/category/get-all-categories.controller';
 
 const wip = (req: any, res: any) => res.send('Work In Progress');
 
@@ -21,7 +22,7 @@ const animalRoutes = Router();
 /*
  * CATEGORIES
  */
-animalRoutes.route(categoryRoutes.getAll).get(wip);
+animalRoutes.route(categoryRoutes.getAll).get(showAllCategories);
 
 animalRoutes.route(categoryRoutes.getSingle).get(showCategoryDetails);
 
