@@ -3,5 +3,5 @@ export const appConfig = {
   port: parseInt(process.env.PORT || '3000', 10),
 
   /** The URL where the app is located */
-  urlApp: process.env.APP_URL as string,
+  appUrl: process.env.APP_URL as string,
 };

@@ -45,7 +45,7 @@ async function createUserDocument(
 }
 
 async function sendConfirmationEmail(user: UserDocument) {
-  const { urlApp } = appConfig;
+  const { appUrl: urlApp } = appConfig;
   const confirmationLink = `${urlApp}/users/sign-up/${user.confirmationCode}`;
 
   await sendEmailWithTemplate<NewAccountEmailData>(
