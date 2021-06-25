@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { UnknownError } from '../../../shared/errors';
 import { getErrorMessages } from '../../../shared/utils';
+import { categoryRoutes, fullRouteOf } from '../../routes/routes.config';
 import { createCategory } from '../../use-cases/category/create-category';
 import { CategoryValidationErrors } from '../../validators/category.validators';
 
@@ -37,7 +38,7 @@ export async function handleCreateCategory(
       description: req.body.description,
     });
 
-    res.redirect('/animals/categories/');
+    res.redirect(fullRouteOf(categoryRoutes.getAll));
   } catch (err: any) {
     next(new UnknownError('Unknown error while creating a category', err));
   }
