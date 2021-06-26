@@ -75,9 +75,9 @@ function renderDeleteForm(res: Response, data: DeleteCategoryData) {
 }
 
 function toTemplateAnimal(a: PreDeleteCategoryAnimalDto) {
-  // TODO: FIX URLS
+  // TODO: Fix URL when animal section is ready
   return <TemplateAnimal>{
     name: a.name,
-    detailsUrl: `/catalog/categories/${a.id}`,
+    detailsUrl: `/catalog/animals/${a.id}`,
   };
 }

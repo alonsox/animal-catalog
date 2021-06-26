@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { NotFound, UnknownError } from '../../../shared/errors';
 import { getErrorMessages } from '../../../shared/utils';
-import { categoryRoutes, fullRouteOf } from '../../routes/routes.config';
 import { CategoryNotFoundError } from '../../use-cases/category/errors/category-not-found';
 import { getCategory } from '../../use-cases/category/get-category';
 import { updateCategory } from '../../use-cases/category/update-category';
@@ -76,7 +75,7 @@ export async function handleUpdateCategory(
     }
 
     // TODO: redirect to category details
-    fullRouteOf(categoryRoutes.getAll);
+    res.redirect('/catalog/categories');
   } catch (err: any) {
     next(
       new UnknownError(

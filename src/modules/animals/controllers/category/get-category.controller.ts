@@ -23,8 +23,8 @@ export async function showCategoryDetails(
     renderDetailsPage(res, {
       name: result.name,
       description: result.description,
-      updateUrl: `animals/catalog/categories/update/${result.id}`,
-      deleteUrl: `animals/catalog/categories/delete/${result.id}`,
+      updateUrl: `/catalog/categories/update/${result.id}`,
+      deleteUrl: `/catalog/categories/delete/${result.id}`,
     });
   } catch (err: any) {
     next(

@@ -26,7 +26,7 @@ export function toPreDeleteCategoryAnimalDto(
   animal: LeanDocument<CategoryDocument>,
 ): PreDeleteCategoryAnimalDto {
   return {
-    id: animal.id,
+    id: animal._id.toString(),
     name: animal.name,
   };
 }

@@ -24,14 +24,6 @@ const animalRoutes = Router();
 /*
  * CATEGORIES
  */
-animalRoutes.route(categoryRoutes.getAll).get(showAllCategories);
-
-animalRoutes.route(categoryRoutes.getSingle).get(showCategoryDetails);
-
-animalRoutes
-  .route(categoryRoutes.create)
-  .get(showCreateCategoryForm)
-  .post(validateCreateCategory(), handleCreateCategory);
 
 animalRoutes
   .route(categoryRoutes.update)
@@ -42,6 +34,15 @@ animalRoutes
   .route(categoryRoutes.delete)
   .get(showDeleteForm)
   .post(handleDeleteCategory);
+
+animalRoutes
+  .route(categoryRoutes.create)
+  .get(showCreateCategoryForm)
+  .post(validateCreateCategory(), handleCreateCategory);
+
+animalRoutes.route(categoryRoutes.getAll).get(showAllCategories);
+
+animalRoutes.route(categoryRoutes.getSingle).get(showCategoryDetails);
 
 /**
  * EXPORTS

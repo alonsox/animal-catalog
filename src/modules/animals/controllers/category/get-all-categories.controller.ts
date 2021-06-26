@@ -13,9 +13,9 @@ export async function showAllCategories(
       (c) =>
         <TemplateCategory>{
           name: c.name,
-          updateUrl: `/animals/catalog/categories/update/${c.id}`,
-          deleteUrl: `/animals/catalog/categories/delete/${c.id}`,
-          detailsUrl: `/animals/catalog/categories/${c.id}`,
+          updateUrl: `/catalog/categories/update/${c.id}`,
+          deleteUrl: `/catalog/categories/delete/${c.id}`,
+          detailsUrl: `/catalog/categories/${c.id}`,
         },
     );
 
