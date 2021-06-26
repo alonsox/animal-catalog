@@ -37,8 +37,8 @@ import {
   showDeleteFamilyForm,
 } from '../controllers/family/delete-family-controllers';
 import { validateUpdateConservationStatus } from '../validators/conservation-status.validator';
-import { showAllconservationStatuses } from '../controllers/conservation-status/get-all-conservation-statuses';
-import { showConservationStatusDetails } from '../controllers/conservation-status/get-conservation-status-details';
+import { showAllconservationStatuses } from '../controllers/conservation-status/get-all-conservation-statuses.controller';
+import { showConservationStatusDetails } from '../controllers/conservation-status/get-conservation-status-details.controller';
 
 const animalRoutes = Router();
 
