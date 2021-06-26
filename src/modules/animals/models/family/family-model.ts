@@ -12,5 +12,5 @@ const familySchema = new Schema<FamilyDocument, FamilyModel>({
 export const Family = model<FamilyDocument, FamilyModel>(
   familyConstants.modelName,
   familySchema,
-  familyConstants.modelName,
+  familyConstants.collectionName,
 );
