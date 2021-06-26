@@ -1,5 +1,5 @@
-import { AnimalDto } from '../../dto/animal.dto/animal.dto';
-import { CreateAnimalDto } from '../../dto/animal.dto/create-animal.dto';
+import { AnimalDto } from '../../dto/animal/animal.dto';
+import { CreateAnimalDto } from '../../dto/animal/create-animal.dto';
 
 export async function createAnimal(
   animalInfo: CreateAnimalDto,

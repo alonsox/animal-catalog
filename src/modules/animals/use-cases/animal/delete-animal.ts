@@ -1,5 +1,5 @@
-import { AnimalDto } from '../../dto/animal.dto/animal.dto';
-import { DeleteAnimalDto } from '../../dto/animal.dto/delete-animal.dto';
+import { AnimalDto } from '../../dto/animal/animal.dto';
+import { DeleteAnimalDto } from '../../dto/animal/delete-animal.dto';
 import { AnimalNotFoundError } from './animal-not-found-error';
 
 export async function deleteAnimal(
