@@ -20,7 +20,7 @@ export async function deleteFamily(
     }
 
     // Check that is not in use
-    const repeatedAnimals = await Animal.find({ class: classId }).lean();
+    const repeatedAnimals = await Animal.find({ family: classId }).lean();
     if (repeatedAnimals.length !== 0) {
       return new FamilyInUseError(
         familyDoc.name,

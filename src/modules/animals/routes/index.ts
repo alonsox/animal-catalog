@@ -32,6 +32,10 @@ import {
 } from '../controllers/family/update-family.controller';
 import { showFamilyDetails } from '../controllers/family/get-family-details.controllet';
 import { showAllFafmilies } from '../controllers/family/get-all-families.controller';
+import {
+  handleDeleteFamily,
+  showDeleteFamilyForm,
+} from '../controllers/family/delete-family-controllers';
 
 const animalRoutes = Router();
 
@@ -60,12 +64,12 @@ animalRoutes.route(classRoutes.getAll()).get(showAllClasses);
 /*
  * FAMILIES
  */
-const wip = (x: string) => (_: any, res: any) => res.send(`Building ${x}`);
+// const wip = (x: string) => (_: any, res: any) => res.send(`Building ${x}`);
 
 animalRoutes
   .route(familyRoutes.delete())
-  .get(wip('GET Delete Families'))
-  .post(wip('POST Delete Families'));
+  .get(showDeleteFamilyForm)
+  .post(handleDeleteFamily);
 
 animalRoutes
   .route(familyRoutes.update())

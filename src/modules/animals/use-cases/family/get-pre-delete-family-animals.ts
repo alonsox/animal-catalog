@@ -18,9 +18,9 @@ export async function getPreDeleteFamilyData(
     }
 
     // Check that is not in use
-    const animalsInUse = await Animal.find({ class: familyId }).lean();
+    const animalsInUse = await Animal.find({ family: familyId }).lean();
     const animals =
-      animalsInUse.length !== 0
+      animalsInUse.length === 0
         ? []
         : animalsInUse.map(toPreDeleteFamilyAnimalDto);
 
