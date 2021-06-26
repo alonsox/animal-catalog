@@ -37,6 +37,7 @@ import {
   showDeleteFamilyForm,
 } from '../controllers/family/delete-family-controllers';
 import { validateUpdateConservationStatus } from '../validators/conservation-status.validator';
+import { showAllconservationStatuses } from '../controllers/conservation-status/get-all-conservation-statuses';
 
 const animalRoutes = Router();
 
@@ -99,7 +100,7 @@ animalRoutes
   .route(conStatusesRoutes.getDetails())
   .get(wip('showing status details'));
 
-animalRoutes.route(conStatusesRoutes.getAll()).get(wip('showing all statuses'));
+animalRoutes.route(conStatusesRoutes.getAll()).get(showAllconservationStatuses);
 
 /**
  * EXPORTS
