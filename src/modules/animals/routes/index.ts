@@ -30,6 +30,7 @@ import {
   handleUpdateFamily,
   showUpdateFamilyForm,
 } from '../controllers/family/update-family.controller';
+import { showFamilyDetails } from '../controllers/family/get-family-details.controllet';
 
 const animalRoutes = Router();
 
@@ -75,7 +76,7 @@ animalRoutes
   .get(showCreateFamilyForm)
   .post(validateCreateFamily(), handleCreateFamily);
 
-animalRoutes.route(familyRoutes.getDetails()).get(wip('GET Single families'));
+animalRoutes.route(familyRoutes.getDetails()).get(showFamilyDetails);
 
 animalRoutes.route(familyRoutes.getAll()).get(wip('GET All families'));
 
