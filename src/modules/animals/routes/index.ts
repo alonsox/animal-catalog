@@ -16,7 +16,7 @@ import { showCategoryDetails } from '../controllers/category/get-category.contro
 import { showAllCategories } from '../controllers/category/get-all-categories.controller';
 import {
   handleDeleteCategory,
-  showDeleteForm,
+  showDeleteCategoryForm,
 } from '../controllers/category/delete-category.controller';
 
 const animalRoutes = Router();
@@ -24,25 +24,24 @@ const animalRoutes = Router();
 /*
  * CATEGORIES
  */
-
 animalRoutes
-  .route(categoryRoutes.update)
+  .route(categoryRoutes.update())
   .get(showUpdateCategoryForm)
   .post(validateUpdateCategory(), handleUpdateCategory);
 
 animalRoutes
-  .route(categoryRoutes.delete)
-  .get(showDeleteForm)
+  .route(categoryRoutes.delete())
+  .get(showDeleteCategoryForm)
   .post(handleDeleteCategory);
 
 animalRoutes
-  .route(categoryRoutes.create)
+  .route(categoryRoutes.create())
   .get(showCreateCategoryForm)
   .post(validateCreateCategory(), handleCreateCategory);
 
-animalRoutes.route(categoryRoutes.getAll).get(showAllCategories);
+animalRoutes.route(categoryRoutes.getAll()).get(showAllCategories);
 
-animalRoutes.route(categoryRoutes.getSingle).get(showCategoryDetails);
+animalRoutes.route(categoryRoutes.getSingle()).get(showCategoryDetails);
 
 /**
  * EXPORTS

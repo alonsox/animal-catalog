@@ -1,5 +1,6 @@
 import { Response, NextFunction, Request } from 'express';
 import { UnknownError } from '../../../shared/errors';
+import { fullRouteOf, categoryRoutes } from '../../routes/routes.config';
 import { getAllCategories } from '../../use-cases/category/get-all-categories';
 
 export async function showAllCategories(
@@ -8,14 +9,13 @@ export async function showAllCategories(
   next: NextFunction,
 ) {
   try {
-    // TODO: Fix the URLS
     const categories = (await getAllCategories()).map(
-      (c) =>
+      (category) =>
         <TemplateCategory>{
-          name: c.name,
-          updateUrl: `/catalog/categories/update/${c.id}`,
-          deleteUrl: `/catalog/categories/delete/${c.id}`,
-          detailsUrl: `/catalog/categories/${c.id}`,
+          name: category.name,
+          updateUrl: fullRouteOf(categoryRoutes.update(category.id)),
+          deleteUrl: fullRouteOf(categoryRoutes.delete(category.id)),
+          detailsUrl: fullRouteOf(categoryRoutes.getSingle(category.id)),
         },
     );
 

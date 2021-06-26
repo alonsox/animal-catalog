@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { NotFound, UnknownError } from '../../../shared/errors';
+import { categoryRoutes, fullRouteOf } from '../../routes/routes.config';
 import { CategoryNotFoundError } from '../../use-cases/category/errors/category-not-found';
 import { getCategory } from '../../use-cases/category/get-category';
 
@@ -19,12 +20,11 @@ export async function showCategoryDetails(
     }
 
     // OK
-    // TODO: Fix this routes
     renderDetailsPage(res, {
       name: result.name,
       description: result.description,
-      updateUrl: `/catalog/categories/update/${result.id}`,
-      deleteUrl: `/catalog/categories/delete/${result.id}`,
+      updateUrl: fullRouteOf(categoryRoutes.update(result.id)),
+      deleteUrl: fullRouteOf(categoryRoutes.update(result.id)),
     });
   } catch (err: any) {
     next(

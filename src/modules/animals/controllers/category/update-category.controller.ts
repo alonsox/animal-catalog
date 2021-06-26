@@ -7,10 +7,10 @@ import { getCategory } from '../../use-cases/category/get-category';
 import { updateCategory } from '../../use-cases/category/update-category';
 import { CategoryValidationErrors } from '../../validators/category.validators';
 import { renderCategoryForm } from './shared';
+import { fullRouteOf, categoryRoutes } from '../../routes/routes.config';
 
 const formTitle = 'Update Category';
 
-// Displays the category update form on GET
 export async function showUpdateCategoryForm(
   req: Request,
   res: Response,
@@ -42,7 +42,6 @@ export async function showUpdateCategoryForm(
   }
 }
 
-// Processes the category update form on POST
 export async function handleUpdateCategory(
   req: Request,
   res: Response,
@@ -74,8 +73,7 @@ export async function handleUpdateCategory(
       return;
     }
 
-    // TODO: redirect to category details
-    res.redirect('/catalog/categories');
+    res.redirect(fullRouteOf(categoryRoutes.getSingle(result.id)));
   } catch (err: any) {
     next(
       new UnknownError(
