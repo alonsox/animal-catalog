@@ -12,7 +12,7 @@ import {
   handleUpdateClass,
   showUpdateClassForm,
 } from '../controllers/class/update-class.controller';
-import { showClassDetails } from '../controllers/class/get-class.controller';
+import { showClassDetails } from '../controllers/class/get-class-details.controller';
 import { showAllClasses } from '../controllers/class/get-all-classes.controller';
 import {
   handleDeleteClass,
@@ -41,7 +41,7 @@ animalRoutes
 
 animalRoutes.route(classRoutes.getAll()).get(showAllClasses);
 
-animalRoutes.route(classRoutes.getSingle()).get(showClassDetails);
+animalRoutes.route(classRoutes.getDetails()).get(showClassDetails);
 
 /**
  * EXPORTS

@@ -24,7 +24,7 @@ export async function showClassDetails(
       name: result.name,
       description: result.description,
       updateUrl: fullRouteOf(classRoutes.update(result.id)),
-      deleteUrl: fullRouteOf(classRoutes.update(result.id)),
+      deleteUrl: fullRouteOf(classRoutes.delete(result.id)),
     });
   } catch (err: any) {
     next(

@@ -73,7 +73,7 @@ export async function handleUpdateClass(
       return;
     }
 
-    res.redirect(fullRouteOf(classRoutes.getSingle(result.id)));
+    res.redirect(fullRouteOf(classRoutes.getDetails(result.id)));
   } catch (err: any) {
     next(
       new UnknownError(

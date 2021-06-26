@@ -15,7 +15,7 @@ export async function showAllClasses(
           name: theClass.name,
           updateUrl: fullRouteOf(classRoutes.update(theClass.id)),
           deleteUrl: fullRouteOf(classRoutes.delete(theClass.id)),
-          detailsUrl: fullRouteOf(classRoutes.getSingle(theClass.id)),
+          detailsUrl: fullRouteOf(classRoutes.getDetails(theClass.id)),
         },
     );
 

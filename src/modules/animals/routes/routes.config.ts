@@ -8,7 +8,7 @@ export const classRoutes = {
   getAll: () => '/classes',
 
   /** If no parameters, it computes the route for the router. */
-  getSingle: (id?: string) => `/classes/${id || ':id'}`,
+  getDetails: (id?: string) => `/classes/${id || ':id'}`,
 
   /** If no parameters, it computes the route for the router. */
   update: (id?: string) => `/classes/update/${id || ':id'}`,

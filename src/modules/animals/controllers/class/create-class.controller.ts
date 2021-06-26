@@ -39,7 +39,7 @@ export async function handleCreateClass(
       description: req.body.description,
     });
 
-    res.redirect(fullRouteOf(classRoutes.getSingle(newClass.id)));
+    res.redirect(fullRouteOf(classRoutes.getDetails(newClass.id)));
   } catch (err: any) {
     next(new UnknownError('Unknown error while creating a class', err));
   }
