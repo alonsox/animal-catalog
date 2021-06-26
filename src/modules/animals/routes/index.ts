@@ -38,6 +38,7 @@ import {
 } from '../controllers/family/delete-family-controllers';
 import { validateUpdateConservationStatus } from '../validators/conservation-status.validator';
 import { showAllconservationStatuses } from '../controllers/conservation-status/get-all-conservation-statuses';
+import { showConservationStatusDetails } from '../controllers/conservation-status/get-conservation-status-details';
 
 const animalRoutes = Router();
 
@@ -98,7 +99,7 @@ animalRoutes
 
 animalRoutes
   .route(conStatusesRoutes.getDetails())
-  .get(wip('showing status details'));
+  .get(showConservationStatusDetails);
 
 animalRoutes.route(conStatusesRoutes.getAll()).get(showAllconservationStatuses);
 
