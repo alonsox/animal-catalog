@@ -10,9 +10,9 @@ const conserStatusSchema = new Schema<
   ConservationStatusDocument,
   ConservationStatusModel
 >({
-  name: { type: String, required: true },
-  abbreviation: { type: String, required: true },
-  description: String,
+  name: { type: String },
+  abbreviation: { type: String },
+  description: { type: String },
 });
 
 // MODEL

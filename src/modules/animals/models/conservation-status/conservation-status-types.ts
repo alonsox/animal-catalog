@@ -1,13 +1,13 @@
 import { Document, Model } from 'mongoose';
 
-export interface ConservationoStatusFields {
+export interface ConservationStatusFields {
   name: string;
   abbreviation: string;
   description: string;
 }
 
 export interface ConservationStatusDocument
-  extends ConservationoStatusFields,
+  extends ConservationStatusFields,
     Document {}
 
 export interface ConservationStatusModel

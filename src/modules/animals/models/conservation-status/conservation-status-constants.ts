@@ -1,4 +1,4 @@
 export const conservationStatusConstants = {
   modelName: 'ConservationStatusModel',
-  collectionName: 'conservation_statuses',
+  collectionName: 'con_statuses',
 };
