@@ -1,5 +1,5 @@
 import { LeanDocument } from 'mongoose';
-import { ClassDocument } from '../../models/class';
+import { AnimalDocument } from '../../models/animal';
 
 /** Information about the class before it can be deleted */
 export interface PreDeleteClassDto {
@@ -23,7 +23,7 @@ export interface PreDeleteClassAnimalDto {
 }
 
 export function toPreDeleteClassAnimalDto(
-  animal: LeanDocument<ClassDocument>,
+  animal: LeanDocument<AnimalDocument>,
 ): PreDeleteClassAnimalDto {
   return {
     id: animal._id.toString(),
