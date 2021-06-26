@@ -39,6 +39,10 @@ import {
 import { validateUpdateConservationStatus } from '../validators/conservation-status.validator';
 import { showAllconservationStatuses } from '../controllers/conservation-status/get-all-conservation-statuses.controller';
 import { showConservationStatusDetails } from '../controllers/conservation-status/get-conservation-status-details.controller';
+import {
+  handleUpdateConservationStatus,
+  showUpdateConservationStatusForm,
+} from '../controllers/conservation-status/update-conservation-status.controller';
 
 const animalRoutes = Router();
 
@@ -90,12 +94,12 @@ animalRoutes.route(familyRoutes.getAll()).get(showAllFafmilies);
  * FAMILIES
  */
 // TODO: Delete the wip
-const wip = (x: string) => (_: any, res: any) => res.send(`Building ${x}`);
+// const wip = (x: string) => (_: any, res: any) => res.send(`Building ${x}`);
 
 animalRoutes
   .route(conStatusesRoutes.update())
-  .get(wip('getting con status'))
-  .post(validateUpdateConservationStatus(), wip('updating status'));
+  .get(showUpdateConservationStatusForm)
+  .post(validateUpdateConservationStatus(), handleUpdateConservationStatus);
 
 animalRoutes
   .route(conStatusesRoutes.getDetails())
