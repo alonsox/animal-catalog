@@ -10,6 +10,7 @@ const animalSchema = new Schema<AnimalDocument, AnimalModel>({
   name: { type: String },
   scientificName: { type: String },
   description: { type: String },
+  photoSrc: { type: String },
   class: {
     type: Schema.Types.ObjectId,
     ref: classConstants.modelName,
@@ -21,7 +22,6 @@ const animalSchema = new Schema<AnimalDocument, AnimalModel>({
   status: {
     type: Schema.Types.ObjectId,
     ref: conservationStatusConstants.modelName,
-    required: true,
   },
 });
 

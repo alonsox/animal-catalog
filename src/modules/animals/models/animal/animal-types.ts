@@ -4,6 +4,7 @@ export interface AnimalFields {
   name: string;
   scientificName: string;
   description: string;
+  photoSrc?: string;
   class: string | Types.ObjectId;
   family: string | Types.ObjectId;
   status: string | Types.ObjectId;
