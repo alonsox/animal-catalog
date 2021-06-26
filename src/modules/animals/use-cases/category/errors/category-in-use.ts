@@ -1,7 +1,11 @@
-// TODO: Include the animals in use?
+import { PreDeleteCategoryAnimalDto } from '../../../dto/pre-delete-category-dto';
 
 export class CategoryInUseError extends Error {
-  constructor(categoryName: string) {
+  readonly animals: PreDeleteCategoryAnimalDto[];
+
+  constructor(categoryName: string, animals: PreDeleteCategoryAnimalDto[]) {
     super(`The category "${categoryName}" is used by some animals`);
+
+    this.animals = animals;
   }
 }

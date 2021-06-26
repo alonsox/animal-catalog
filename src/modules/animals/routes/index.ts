@@ -14,8 +14,10 @@ import {
 } from '../controllers/category/update-category.controller';
 import { showCategoryDetails } from '../controllers/category/get-category.controller';
 import { showAllCategories } from '../controllers/category/get-all-categories.controller';
-
-const wip = (req: any, res: any) => res.send('Work In Progress');
+import {
+  handleDeleteCategory,
+  showDeleteForm,
+} from '../controllers/category/delete-category.controller';
 
 const animalRoutes = Router();
 
@@ -36,7 +38,10 @@ animalRoutes
   .get(showUpdateCategoryForm)
   .post(validateUpdateCategory(), handleUpdateCategory);
 
-animalRoutes.route(categoryRoutes.delete).post(wip);
+animalRoutes
+  .route(categoryRoutes.delete)
+  .get(showDeleteForm)
+  .post(handleDeleteCategory);
 
 /**
  * EXPORTS
