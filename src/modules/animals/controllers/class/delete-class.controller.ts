@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { NotFound } from '../../../shared/errors';
-import { PreDeleteClassAnimalDto } from '../../dto/pre-delete-class-dto';
+import { PreDeleteClassAnimalDto } from '../../dto/class/pre-delete-class-dto';
 import { classRoutes, fullRouteOf } from '../../routes/routes.config';
 import { deleteClass } from '../../use-cases/class/delete-class';
 import { ClassInUseError } from '../../use-cases/class/errors/class-in-use';

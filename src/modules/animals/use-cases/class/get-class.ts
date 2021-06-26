@@ -1,5 +1,5 @@
-import { classDocumentToDto, ClassDto } from '../../dto/class-dto';
-import { GetClassDto } from '../../dto/get-class-dto';
+import { classDocumentToDto, ClassDto } from '../../dto/class/class-dto';
+import { GetClassDto } from '../../dto/class/get-class-dto';
 import { Class } from '../../models/class';
 import { ClassNotFoundError } from './errors/class-not-found';
 

@@ -1,4 +1,4 @@
-import { ClassDocument } from '../models/class';
+import { ClassDocument } from '../../models/class';
 
 interface ClassDtoProps {
   id: string;

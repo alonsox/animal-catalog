@@ -1,7 +1,7 @@
 import {
   PreDeleteClassDto,
   toPreDeleteClassAnimalDto,
-} from '../../dto/pre-delete-class-dto';
+} from '../../dto/class/pre-delete-class-dto';
 import { Animal } from '../../models/animal';
 import { Class } from '../../models/class';
 import { ClassNotFoundError } from './errors/class-not-found';

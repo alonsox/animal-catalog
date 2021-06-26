@@ -1,4 +1,4 @@
-import { classDocumentToDto, ClassDto } from '../../dto/class-dto';
+import { classDocumentToDto, ClassDto } from '../../dto/class/class-dto';
 import { Class } from '../../models/class';
 
 export async function getAllClasses(): Promise<ClassDto[]> {

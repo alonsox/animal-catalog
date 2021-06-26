@@ -1,5 +1,5 @@
 import { LeanDocument } from 'mongoose';
-import { ClassDocument } from '../models/class';
+import { ClassDocument } from '../../models/class';
 
 /** Information about the class before it can be deleted */
 export interface PreDeleteClassDto {

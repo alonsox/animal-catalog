@@ -1,4 +1,4 @@
-import { PreDeleteClassAnimalDto } from '../../../dto/pre-delete-class-dto';
+import { PreDeleteClassAnimalDto } from '../../../dto/class/pre-delete-class-dto';
 
 export class ClassInUseError extends Error {
   readonly animals: PreDeleteClassAnimalDto[];

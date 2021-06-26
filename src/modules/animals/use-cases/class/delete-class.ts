@@ -1,6 +1,6 @@
-import { classDocumentToDto, ClassDto } from '../../dto/class-dto';
-import { DeleteClassDto } from '../../dto/delete-class-dto';
-import { toPreDeleteClassAnimalDto } from '../../dto/pre-delete-class-dto';
+import { classDocumentToDto, ClassDto } from '../../dto/class/class-dto';
+import { DeleteClassDto } from '../../dto/class/delete-class-dto';
+import { toPreDeleteClassAnimalDto } from '../../dto/class/pre-delete-class-dto';
 import { Animal } from '../../models/animal';
 import { Class } from '../../models/class';
 import { ClassInUseError } from './errors/class-in-use';

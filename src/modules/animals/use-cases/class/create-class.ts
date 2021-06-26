@@ -1,5 +1,5 @@
-import { classDocumentToDto, ClassDto } from '../../dto/class-dto';
-import { CreateClassDto } from '../../dto/create-class-dto';
+import { classDocumentToDto, ClassDto } from '../../dto/class/class-dto';
+import { CreateClassDto } from '../../dto/class/create-class-dto';
 import { Class } from '../../models/class';
 
 export async function createClass(
