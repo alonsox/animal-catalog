@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../../partials/head-content.ejs') %>
+  </head>
+  <body>
+    <%- include('../../partials/navbar.ejs') %>
+    <div class="container-lg">
+      <div
+        class="d-flex justify-content-between align-items-center flex-wrap my-3"
+      >
+        <h1>All Families</h1>
+        <a href="<%= createUrl %>" class="text-decoration-none text-white">
+          <button
+            class="btn btn-primary d-flex justify-content-between align-items-center"
+          >
+            <span style="padding-right: 10px">New</span>
+            <span class="material-icons">add</span>
+          </button>
+        </a>
+      </div>
+
+      <ul class="list-group">
+        <% families.forEach(family => { %>
+        <a href="<%= family.detailsUrl %>" class="text-decoration-none">
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+          >
+            <h3><%= family.name %></h3>
+            <div>
+              <a
+                href="<%= family.updateUrl %>"
+                class="text-decoration-none text-white mr-2"
+              >
+                <button
+                  class="btn btn-primary d-inline-flex align-items-center"
+                >
+                  <i class="material-icons small">edit</i>
+                </button>
+              </a>
+              <a
+                href="<%= family.deleteUrl %>"
+                class="text-decoration-none text-white"
+              >
+                <button class="btn btn-danger d-inline-flex align-items-center">
+                  <i class="material-icons small">delete</i>
+                </button>
+              </a>
+            </div>
+          </li>
+        </a>
+        <% }) %>
+      </ul>
+    </div>
+  </body>
+</html>
