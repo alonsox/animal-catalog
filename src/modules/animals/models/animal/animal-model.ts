@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { animalConstants } from './animal-constants';
-import { categoryConstants } from '../category';
+import { classConstants } from '../class';
 import { familyConstants } from '../family';
 import { conservationStatusConstants } from '../conservation-status';
 import { AnimalDocument, AnimalModel } from './animal-types';
@@ -10,9 +10,9 @@ const animalSchema = new Schema<AnimalDocument, AnimalModel>({
   name: { type: String },
   scientificName: { type: String },
   description: { type: String },
-  category: {
+  class: {
     type: Schema.Types.ObjectId,
-    ref: categoryConstants.modelName,
+    ref: classConstants.modelName,
   },
   family: {
     type: Schema.Types.ObjectId,

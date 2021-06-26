@@ -1,47 +1,47 @@
 import { Router } from 'express';
-import { categoryRoutes } from './routes.config';
+import { classRoutes } from './routes.config';
 import {
-  validateCreateCategory,
-  validateUpdateCategory,
-} from '../validators/category.validators';
+  validateCreateClass,
+  validateUpdateClass,
+} from '../validators/class.validators';
 import {
-  handleCreateCategory,
-  showCreateCategoryForm,
-} from '../controllers/category/create-category.controller';
+  handleCreateClass,
+  showCreateClassForm,
+} from '../controllers/class/create-class.controller';
 import {
-  handleUpdateCategory,
-  showUpdateCategoryForm,
-} from '../controllers/category/update-category.controller';
-import { showCategoryDetails } from '../controllers/category/get-category.controller';
-import { showAllCategories } from '../controllers/category/get-all-categories.controller';
+  handleUpdateClass,
+  showUpdateClassForm,
+} from '../controllers/class/update-class.controller';
+import { showClassDetails } from '../controllers/class/get-class.controller';
+import { showAllClasses } from '../controllers/class/get-all-classes.controller';
 import {
-  handleDeleteCategory,
-  showDeleteCategoryForm,
-} from '../controllers/category/delete-category.controller';
+  handleDeleteClass,
+  showDeleteClassForm,
+} from '../controllers/class/delete-class.controller';
 
 const animalRoutes = Router();
 
 /*
- * CATEGORIES
+ * CLASSES
  */
 animalRoutes
-  .route(categoryRoutes.update())
-  .get(showUpdateCategoryForm)
-  .post(validateUpdateCategory(), handleUpdateCategory);
+  .route(classRoutes.update())
+  .get(showUpdateClassForm)
+  .post(validateUpdateClass(), handleUpdateClass);
 
 animalRoutes
-  .route(categoryRoutes.delete())
-  .get(showDeleteCategoryForm)
-  .post(handleDeleteCategory);
+  .route(classRoutes.delete())
+  .get(showDeleteClassForm)
+  .post(handleDeleteClass);
 
 animalRoutes
-  .route(categoryRoutes.create())
-  .get(showCreateCategoryForm)
-  .post(validateCreateCategory(), handleCreateCategory);
+  .route(classRoutes.create())
+  .get(showCreateClassForm)
+  .post(validateCreateClass(), handleCreateClass);
 
-animalRoutes.route(categoryRoutes.getAll()).get(showAllCategories);
+animalRoutes.route(classRoutes.getAll()).get(showAllClasses);
 
-animalRoutes.route(categoryRoutes.getSingle()).get(showCategoryDetails);
+animalRoutes.route(classRoutes.getSingle()).get(showClassDetails);
 
 /**
  * EXPORTS

@@ -4,7 +4,7 @@ export interface AnimalFields {
   name: string;
   scientificName: string;
   description: string;
-  category: string | Types.ObjectId;
+  class: string | Types.ObjectId;
   family: string | Types.ObjectId;
   status: string | Types.ObjectId;
 }

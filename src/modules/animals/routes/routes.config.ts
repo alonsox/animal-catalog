@@ -1,23 +1,23 @@
 /** Base path to mount all the animals routes */
-export const animalsMountPoint = '/catalog';
+export const catalogMountPoint = '/catalog';
 
-/** Routes for the categories (not including base path) */
-export const categoryRoutes = {
-  create: () => '/categories/new',
+/** Routes for the classes (not including base path) */
+export const classRoutes = {
+  create: () => '/classes/new',
 
-  getAll: () => '/categories',
-
-  /** If no parameters, it computes the route for the router. */
-  getSingle: (id?: string) => `/categories/${id || ':id'}`,
+  getAll: () => '/classes',
 
   /** If no parameters, it computes the route for the router. */
-  update: (id?: string) => `/categories/update/${id || ':id'}`,
+  getSingle: (id?: string) => `/classes/${id || ':id'}`,
 
   /** If no parameters, it computes the route for the router. */
-  delete: (id?: string) => `/categories/delete/${id || ':id'}`,
+  update: (id?: string) => `/classes/update/${id || ':id'}`,
+
+  /** If no parameters, it computes the route for the router. */
+  delete: (id?: string) => `/classes/delete/${id || ':id'}`,
 };
 
-export const fullRouteOf = makeFullRoute(animalsMountPoint);
+export const fullRouteOf = makeFullRoute(catalogMountPoint);
 
 function makeFullRoute(basePath: string) {
   return function aux(path: string) {

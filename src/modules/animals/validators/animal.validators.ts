@@ -1,6 +1,6 @@
 import { body } from 'express-validator';
 import { Animal } from '../models/animal';
-import { Category } from '../models/category';
+import { Class } from '../models/class';
 import { ConservationStatus } from '../models/conservation-status';
 import { Family } from '../models/family';
 
@@ -24,10 +24,10 @@ const descriptionErrors = {
   isEmpty: 'The description cannot be empty',
 };
 
-const categoryErrors = {
-  notExists: 'The category must be provided',
-  isEmpty: 'The category cannot be empty',
-  notFound: 'This category does not exists',
+const classErrors = {
+  notExists: 'The class must be provided',
+  isEmpty: 'The class cannot be empty',
+  notFound: 'This class does not exists',
 };
 
 const familyErrors = {
@@ -72,18 +72,18 @@ const baseValidators = [
     .notEmpty()
     .withMessage(descriptionErrors.isEmpty),
 
-  // CATEGORY
-  body('category')
+  // CLASS
+  body('class')
     .exists({ checkNull: true })
-    .withMessage(categoryErrors.notExists)
+    .withMessage(classErrors.notExists)
     .trim()
     .notEmpty()
-    .withMessage(categoryErrors.isEmpty)
+    .withMessage(classErrors.isEmpty)
     .custom(async (value: string) => {
-      const categoryExists = await Category.exists({ _id: value });
+      const classExists = await Class.exists({ _id: value });
 
-      if (!categoryExists) {
-        throw new Error(categoryErrors.notFound);
+      if (!classExists) {
+        throw new Error(classErrors.notFound);
       }
     }),
 
