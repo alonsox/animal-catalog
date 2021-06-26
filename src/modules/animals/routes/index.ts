@@ -1,5 +1,10 @@
 import { Router } from 'express';
-import { classRoutes, conStatusesRoutes, familyRoutes } from './routes.config';
+import {
+  animalRoutes,
+  classRoutes,
+  conStatusesRoutes,
+  familyRoutes,
+} from './routes.config';
 import {
   validateCreateClass,
   validateUpdateClass,
@@ -43,73 +48,103 @@ import {
   handleUpdateConservationStatus,
   showUpdateConservationStatusForm,
 } from '../controllers/conservation-status/update-conservation-status.controller';
+import {
+  validateCreateAnimal,
+  validateUpdateAnimal,
+} from '../validators/animal.validators';
 
-const animalRoutes = Router();
+const catalogRoutes = Router();
 
 /*
  * CLASSES
  */
-animalRoutes
+catalogRoutes
   .route(classRoutes.update())
   .get(showUpdateClassForm)
   .post(validateUpdateClass(), handleUpdateClass);
 
-animalRoutes
+catalogRoutes
   .route(classRoutes.delete())
   .get(showDeleteClassForm)
   .post(handleDeleteClass);
 
-animalRoutes
+catalogRoutes
   .route(classRoutes.create())
   .get(showCreateClassForm)
   .post(validateCreateClass(), handleCreateClass);
 
-animalRoutes.route(classRoutes.getDetails()).get(showClassDetails);
+catalogRoutes.route(classRoutes.getDetails()).get(showClassDetails);
 
-animalRoutes.route(classRoutes.getAll()).get(showAllClasses);
+catalogRoutes.route(classRoutes.getAll()).get(showAllClasses);
 
 /*
  * FAMILIES
  */
-animalRoutes
+catalogRoutes
   .route(familyRoutes.delete())
   .get(showDeleteFamilyForm)
   .post(handleDeleteFamily);
 
-animalRoutes
+catalogRoutes
   .route(familyRoutes.update())
   .get(showUpdateFamilyForm)
   .post(validateUpdateFamily(), handleUpdateFamily);
 
-animalRoutes
+catalogRoutes
   .route(familyRoutes.create())
   .get(showCreateFamilyForm)
   .post(validateCreateFamily(), handleCreateFamily);
 
-animalRoutes.route(familyRoutes.getDetails()).get(showFamilyDetails);
+catalogRoutes.route(familyRoutes.getDetails()).get(showFamilyDetails);
 
-animalRoutes.route(familyRoutes.getAll()).get(showAllFafmilies);
+catalogRoutes.route(familyRoutes.getAll()).get(showAllFafmilies);
 
 /*
- * FAMILIES
+ * CONSERVATION STATUS
  */
-// TODO: Delete the wip
-// const wip = (x: string) => (_: any, res: any) => res.send(`Building ${x}`);
-
-animalRoutes
+catalogRoutes
   .route(conStatusesRoutes.update())
   .get(showUpdateConservationStatusForm)
   .post(validateUpdateConservationStatus(), handleUpdateConservationStatus);
 
-animalRoutes
+catalogRoutes
   .route(conStatusesRoutes.getDetails())
   .get(showConservationStatusDetails);
 
-animalRoutes.route(conStatusesRoutes.getAll()).get(showAllconservationStatuses);
+catalogRoutes
+  .route(conStatusesRoutes.getAll())
+  .get(showAllconservationStatuses);
+
+// TODO: Delete the wip
+const wip = (x: string) => (_: any, res: any) => res.send(x);
+
+/*
+ * ANIMALS
+ */
+catalogRoutes
+  .route(animalRoutes.delete())
+  .get(wip('Showing delete animal form...'))
+  .post(wip('Deleting animal...'));
+
+catalogRoutes
+  .route(animalRoutes.update())
+  .get(wip('Showing update animal form...'))
+  .post(validateUpdateAnimal(), wip('Updating animal...'));
+
+catalogRoutes
+  .route(animalRoutes.create())
+  .get(wip('Showing create animal form...'))
+  .post(validateCreateAnimal(), wip('Creating animal...'));
+
+catalogRoutes
+  .route(animalRoutes.getDetails())
+  .get(wip('Getting single animal'));
+
+catalogRoutes.route(animalRoutes.getAll()).get(wip('Getting all animals'));
 
 /**
  * EXPORTS
  */
-export { animalRoutes };
+export { catalogRoutes };
 
 export * from './routes.config';

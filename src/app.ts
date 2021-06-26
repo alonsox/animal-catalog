@@ -7,7 +7,7 @@ import {
 } from './modules/security/middleware';
 import { authRoutes } from './modules/security/routes';
 import { usersRoutes } from './modules/users/routes';
-import { catalogMountPoint, animalRoutes } from './modules/animals/routes';
+import { catalogMountPoint, catalogRoutes } from './modules/animals/routes';
 
 const app = express();
 
@@ -38,6 +38,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (_, res) => res.render('home', { title: 'Animal Catalog' }));
 app.use('/auth', authRoutes);
 app.use('/users', usersRoutes);
-app.use(catalogMountPoint, animalRoutes);
+app.use(catalogMountPoint, catalogRoutes);
 
 export { app };

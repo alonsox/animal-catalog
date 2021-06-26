@@ -33,7 +33,7 @@ export const familyRoutes = {
   delete: (id?: string) => `/families/delete/${id || ':id'}`,
 };
 
-/** Routes for the families (not including base path) */
+/** Routes for the conservation statuses (not including base path) */
 export const conStatusesRoutes = {
   getAll: () => '/con-statuses',
 
@@ -42,6 +42,22 @@ export const conStatusesRoutes = {
 
   /** If no parameters, it computes the route for the router. */
   update: (id?: string) => `/con-statuses/update/${id || ':id'}`,
+};
+
+/** Routes for the families (not including base path) */
+export const animalRoutes = {
+  create: () => '/animals/new',
+
+  getAll: () => '/animals',
+
+  /** If no parameters, it computes the route for the router. */
+  getDetails: (id?: string) => `/animals/${id || ':id'}`,
+
+  /** If no parameters, it computes the route for the router. */
+  update: (id?: string) => `/animals/update/${id || ':id'}`,
+
+  /** If no parameters, it computes the route for the router. */
+  delete: (id?: string) => `/animals/delete/${id || ':id'}`,
 };
 
 export const fullRouteOf = makeFullRoute(catalogMountPoint);
