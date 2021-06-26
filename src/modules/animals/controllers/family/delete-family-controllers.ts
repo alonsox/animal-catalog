@@ -75,6 +75,7 @@ function renderDeleteForm(res: Response, data: DeleteFamilyData) {
 function toTemplateAnimal(animal: PreDeleteFamilyAnimalDto) {
   return <TemplateAnimal>{
     name: animal.name,
-    detailsUrl: fullRouteOf(familyRoutes.getDetails(animal.id)),
+    // TODO: Should use the animal routes
+    detailsUrl: '',
   };
 }

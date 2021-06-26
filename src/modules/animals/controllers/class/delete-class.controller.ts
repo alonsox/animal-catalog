@@ -76,6 +76,7 @@ function renderDeleteForm(res: Response, data: DeleteClassData) {
 function toTemplateAnimal(animal: PreDeleteClassAnimalDto) {
   return <TemplateAnimal>{
     name: animal.name,
-    detailsUrl: fullRouteOf(classRoutes.getDetails(animal.id)),
+    // TODO: Should use the animal routes
+    detailsUrl: '',
   };
 }
