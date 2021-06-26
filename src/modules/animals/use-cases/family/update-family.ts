@@ -6,16 +6,16 @@ import { FamilyNotFoundError } from './errors/family-not-found-error';
 export async function updateFamily(
   familyInfo: UpdateFamilyDto,
 ): Promise<FamilyDto | FamilyNotFoundError> {
-  const { id: classId, ...data } = familyInfo;
+  const { id: familyId, ...data } = familyInfo;
   try {
-    const document = await Family.findByIdAndUpdate(classId, data).exec();
+    const document = await Family.findByIdAndUpdate(familyId, data).exec();
 
     if (!document) {
-      return new FamilyNotFoundError(classId);
+      return new FamilyNotFoundError(familyId);
     }
 
     return familyDocumentToDto(document);
   } catch (err: any) {
-    return new FamilyNotFoundError(classId);
+    return new FamilyNotFoundError(familyId);
   }
 }

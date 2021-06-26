@@ -6,9 +6,9 @@ import { FamilyNotFoundError } from './errors/family-not-found-error';
 export async function getFamily(
   familyInfo: GetFamilyDto,
 ): Promise<FamilyDto | FamilyNotFoundError> {
-  const { id: classId } = familyInfo;
+  const { id: familyId } = familyInfo;
   try {
-    const document = await Family.findById(classId);
+    const document = await Family.findById(familyId);
 
     if (!document) {
       return new FamilyNotFoundError(familyInfo.id);
@@ -16,6 +16,6 @@ export async function getFamily(
 
     return familyDocumentToDto(document);
   } catch (err: any) {
-    return new FamilyNotFoundError(classId);
+    return new FamilyNotFoundError(familyId);
   }
 }

@@ -22,7 +22,14 @@ import {
   handleCreateFamily,
   showCreateFamilyForm,
 } from '../controllers/family/create-family.controller';
-import { validateCreateFamily } from '../validators/family.validators';
+import {
+  validateCreateFamily,
+  validateUpdateFamily,
+} from '../validators/family.validators';
+import {
+  handleUpdateFamily,
+  showUpdateFamilyForm,
+} from '../controllers/family/update-family.controller';
 
 const animalRoutes = Router();
 
@@ -54,14 +61,14 @@ animalRoutes.route(classRoutes.getAll()).get(showAllClasses);
 const wip = (x: string) => (_: any, res: any) => res.send(`Building ${x}`);
 
 animalRoutes
-  .route(familyRoutes.update())
-  .get(wip('GET Update Families'))
-  .post(wip('POST Update Families'));
-
-animalRoutes
   .route(familyRoutes.delete())
   .get(wip('GET Delete Families'))
   .post(wip('POST Delete Families'));
+
+animalRoutes
+  .route(familyRoutes.update())
+  .get(showUpdateFamilyForm)
+  .post(validateUpdateFamily(), handleUpdateFamily);
 
 animalRoutes
   .route(familyRoutes.create())
