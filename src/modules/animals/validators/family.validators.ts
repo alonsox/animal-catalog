@@ -1,6 +1,11 @@
 import { body } from 'express-validator';
 import { Family } from '../models/family';
 
+export interface FamilyValidationErrors {
+  name: string;
+  description: string;
+}
+
 /*
  * ERROR MESSAGES
  */

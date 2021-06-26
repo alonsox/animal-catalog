@@ -18,6 +18,11 @@ import {
   handleDeleteClass,
   showDeleteClassForm,
 } from '../controllers/class/delete-class.controller';
+import {
+  handleCreateFamily,
+  showCreateFamilyForm,
+} from '../controllers/family/create-family.controller';
+import { validateCreateFamily } from '../validators/family.validators';
 
 const animalRoutes = Router();
 
@@ -39,9 +44,9 @@ animalRoutes
   .get(showCreateClassForm)
   .post(validateCreateClass(), handleCreateClass);
 
-animalRoutes.route(classRoutes.getAll()).get(showAllClasses);
-
 animalRoutes.route(classRoutes.getDetails()).get(showClassDetails);
+
+animalRoutes.route(classRoutes.getAll()).get(showAllClasses);
 
 /*
  * FAMILIES
@@ -60,12 +65,12 @@ animalRoutes
 
 animalRoutes
   .route(familyRoutes.create())
-  .get(wip('GET Create Families'))
-  .post(wip('POST Create Families'));
-
-animalRoutes.route(familyRoutes.getAll()).get(wip('GET All families'));
+  .get(showCreateFamilyForm)
+  .post(validateCreateFamily(), handleCreateFamily);
 
 animalRoutes.route(familyRoutes.getDetails()).get(wip('GET Single families'));
+
+animalRoutes.route(familyRoutes.getAll()).get(wip('GET All families'));
 
 /**
  * EXPORTS
