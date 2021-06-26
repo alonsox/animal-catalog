@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { classRoutes, familyRoutes } from './routes.config';
+import { classRoutes, conStatusesRoutes, familyRoutes } from './routes.config';
 import {
   validateCreateClass,
   validateUpdateClass,
@@ -36,6 +36,7 @@ import {
   handleDeleteFamily,
   showDeleteFamilyForm,
 } from '../controllers/family/delete-family-controllers';
+import { validateUpdateConservationStatus } from '../validators/conservation-status.validator';
 
 const animalRoutes = Router();
 
@@ -64,8 +65,6 @@ animalRoutes.route(classRoutes.getAll()).get(showAllClasses);
 /*
  * FAMILIES
  */
-// const wip = (x: string) => (_: any, res: any) => res.send(`Building ${x}`);
-
 animalRoutes
   .route(familyRoutes.delete())
   .get(showDeleteFamilyForm)
@@ -84,6 +83,23 @@ animalRoutes
 animalRoutes.route(familyRoutes.getDetails()).get(showFamilyDetails);
 
 animalRoutes.route(familyRoutes.getAll()).get(showAllFafmilies);
+
+/*
+ * FAMILIES
+ */
+// TODO: Delete the wip
+const wip = (x: string) => (_: any, res: any) => res.send(`Building ${x}`);
+
+animalRoutes
+  .route(conStatusesRoutes.update())
+  .get(wip('getting con status'))
+  .post(validateUpdateConservationStatus(), wip('updating status'));
+
+animalRoutes
+  .route(conStatusesRoutes.getDetails())
+  .get(wip('showing status details'));
+
+animalRoutes.route(conStatusesRoutes.getAll()).get(wip('showing all statuses'));
 
 /**
  * EXPORTS

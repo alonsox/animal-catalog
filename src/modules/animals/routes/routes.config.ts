@@ -33,6 +33,17 @@ export const familyRoutes = {
   delete: (id?: string) => `/families/delete/${id || ':id'}`,
 };
 
+/** Routes for the families (not including base path) */
+export const conStatusesRoutes = {
+  getAll: () => '/con-statuses',
+
+  /** If no parameters, it computes the route for the router. */
+  getDetails: (id?: string) => `/con-statuses/${id || ':id'}`,
+
+  /** If no parameters, it computes the route for the router. */
+  update: (id?: string) => `/con-statuses/update/${id || ':id'}`,
+};
+
 export const fullRouteOf = makeFullRoute(catalogMountPoint);
 
 function makeFullRoute(basePath: string) {
