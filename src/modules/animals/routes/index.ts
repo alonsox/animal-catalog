@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { classRoutes } from './routes.config';
+import { classRoutes, familyRoutes } from './routes.config';
 import {
   validateCreateClass,
   validateUpdateClass,
@@ -42,6 +42,30 @@ animalRoutes
 animalRoutes.route(classRoutes.getAll()).get(showAllClasses);
 
 animalRoutes.route(classRoutes.getDetails()).get(showClassDetails);
+
+/*
+ * FAMILIES
+ */
+const wip = (x: string) => (_: any, res: any) => res.send(`Building ${x}`);
+
+animalRoutes
+  .route(familyRoutes.update())
+  .get(wip('GET Update Families'))
+  .post(wip('POST Update Families'));
+
+animalRoutes
+  .route(familyRoutes.delete())
+  .get(wip('GET Delete Families'))
+  .post(wip('POST Delete Families'));
+
+animalRoutes
+  .route(familyRoutes.create())
+  .get(wip('GET Create Families'))
+  .post(wip('POST Create Families'));
+
+animalRoutes.route(familyRoutes.getAll()).get(wip('GET All families'));
+
+animalRoutes.route(familyRoutes.getDetails()).get(wip('GET Single families'));
 
 /**
  * EXPORTS
