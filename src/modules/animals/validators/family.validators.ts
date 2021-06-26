@@ -60,19 +60,15 @@ export function validateUpdateFamily() {
     ...baseValidators,
     // NAME
     body('name').custom(async (value, { req }) => {
-      // TODO: Check later
-      const existingFamily = await Family.findOne(
-        {
-          name: value.toLowerCase(),
-        },
-        'name',
-      ).exec();
+      const existingFamily = await Family.findOne({
+        name: value.toLowerCase(),
+      }).exec();
 
       if (!existingFamily) {
         return;
       }
 
-      const familyBeingUpdatedId = req.body.updatedFamilyId.toString();
+      const familyBeingUpdatedId = req.params?.id.toString();
       if (familyBeingUpdatedId !== existingFamily._id.toString()) {
         throw new Error(nameErrors.alreadyExists);
       }
