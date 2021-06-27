@@ -1,13 +1,15 @@
 import {
-  BaseConservationStatusDto,
-  conStatusDocumentToBaseDto,
-} from '../../dto/conservation-status/base-conservation-status.dto';
+  BasicConservationStatusDto,
+  toBasicConservationStatusDto,
+} from '../../dto/conservation-status/basic-conservation-status.dto';
 import { ConservationStatus } from '../../models/conservation-status';
 
 export async function getAllConservationStatuses(): Promise<
-  BaseConservationStatusDto[]
+  BasicConservationStatusDto[]
 > {
-  const statuses = await ConservationStatus.find({});
+  const statuses = await ConservationStatus.find({})
+    .select('-description')
+    .lean();
 
-  return statuses.map(conStatusDocumentToBaseDto);
+  return statuses.map(toBasicConservationStatusDto);
 }
