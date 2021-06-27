@@ -1,14 +1,14 @@
 import { ConservationStatusDocument } from '../../models/conservation-status';
 
-interface FullConservationStatusDtoProps {
+interface ConservationStatusDtoProps {
   id: string;
   name: string;
   abbreviation: string;
   description: string;
 }
 
-export class FullConservationStatusDto {
-  constructor(private props: FullConservationStatusDtoProps) {}
+export class ConservationStatusDto {
+  constructor(private props: ConservationStatusDtoProps) {}
 
   get id() {
     return this.props.id;
@@ -27,10 +27,10 @@ export class FullConservationStatusDto {
   }
 }
 
-export function conStatusDocumentToFullDto(
+export function toConservationStatusDto(
   conStatusDoc: ConservationStatusDocument,
-): FullConservationStatusDto {
-  return new FullConservationStatusDto({
+): ConservationStatusDto {
+  return new ConservationStatusDto({
     id: conStatusDoc.id,
     name: conStatusDoc.name,
     description: conStatusDoc.description,
