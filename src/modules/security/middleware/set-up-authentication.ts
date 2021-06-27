@@ -58,7 +58,7 @@ async function authenticateUser(
   done: DoneFn,
 ) {
   try {
-    const user = await User.findOne({ username: loginField });
+    const user = await User.findByLoginField(loginField);
 
     // Check that the user exists and is active
     if (!user || !user.isActive) {
