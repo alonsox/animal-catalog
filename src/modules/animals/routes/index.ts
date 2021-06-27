@@ -53,6 +53,7 @@ import {
   validateUpdateAnimal,
 } from '../validators/animal.validators';
 import { showAllAnimals } from '../controllers/animal/get-all-animals.controller';
+import { showCreateAnimalForm } from '../controllers/animal/create-animal.controller';
 
 const catalogRoutes = Router();
 
@@ -134,7 +135,7 @@ catalogRoutes
 
 catalogRoutes
   .route(animalRoutes.create())
-  .get(wip('Showing create animal form...'))
+  .get(showCreateAnimalForm)
   .post(validateCreateAnimal(), wip('Creating animal...'));
 
 catalogRoutes

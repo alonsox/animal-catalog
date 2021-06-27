@@ -6,7 +6,7 @@
   <body>
     <%- include('../../partials/navbar.ejs') %>
     <div class="container-lg my-3">
-      <h1><% formTitle %></h1>
+      <h1><%= formTitle %></h1>
       <form action="" method="post">
         <%# NAME %>
         <div class="form-group">
@@ -66,7 +66,9 @@
           <select name="status" id="status" class="form-control">
             <% statuses.forEach(status => { %> <%# TODO: See how to mark as
             selected in case of update %>
-            <option value="<% status.id %>"><%= status.name %></option>
+            <option value="<% status.id %>">
+              <%= status.name %> (<%= status.abbreviation %>)
+            </option>
             <% }) %>
           </select>
         </div>
@@ -80,7 +82,7 @@
             id="description"
             rows="5"
           >
-<%= value description %></textarea
+<%= animal.description %></textarea
           >
         </div>
 
