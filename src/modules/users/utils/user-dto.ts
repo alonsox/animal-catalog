@@ -1,3 +1,4 @@
+import { capitalizeFirst } from '../../shared/utils/formatters';
 import { UserDocument } from '../models/user';
 
 interface UserDtoProps {
@@ -41,8 +42,8 @@ export class UserDto {
 export function userDocumentToDto(user: UserDocument): UserDto {
   return new UserDto({
     id: user.id,
-    firstName: user.firstName,
-    lastName: user.lastName,
+    firstName: capitalizeFirst(user.firstName),
+    lastName: capitalizeFirst(user.lastName),
     username: user.username,
     email: user.email,
     isAdmin: user.isAdmin,
