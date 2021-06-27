@@ -4,6 +4,15 @@ import { Class } from '../models/class';
 import { ConservationStatus } from '../models/conservation-status';
 import { Family } from '../models/family';
 
+export interface AnimalvalidationErrors {
+  name: string;
+  scientificName: string;
+  description: string;
+  class: string;
+  family: string;
+  status: string;
+}
+
 /*
  * ERROR MESSAGES
  */

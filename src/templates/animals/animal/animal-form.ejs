@@ -1,12 +1,3 @@
-{{!-- TEMPLATE VARIABLES
-  * title: Title of the page 
-  * animal: An animal object to include when updating the form
-  * families: An array with all the families
-  * categories: An array with the name of all the categories
-  * statuses: An array with all the conservation statuses and their abbreviations
-  * errors: The object with the errors
-  * updatedAnimalId: true if the form renders an animal being updated
- --}}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,7 +18,7 @@
             class="form-control <% if (errors.name) { %>is-invalid<% } %>"
             placeholder="Puma"
             autocomplete="off"
-            value="<%= name %>"
+            value="<%= animal.name %>"
           />
           <div class="invalid-feedback"><%= errors.name %></div>
         </div>
@@ -39,10 +30,10 @@
             type="text"
             id="scientificName"
             name="scientificName"
-            class="form-control font-italic <% if (errors.errors.scientificName) { %>is-invalid<% } %>"
+            class="form-control font-italic <% if (errors.scientificName) { %>is-invalid<% } %>"
             placeholder="Puma Concolor"
             autocomplete="off"
-            value="<%= scientificName %>"
+            value="<%= animal.scientificName %>"
           />
           <div class="invalid-feedback"><%= errors.scientificName %></div>
         </div>
