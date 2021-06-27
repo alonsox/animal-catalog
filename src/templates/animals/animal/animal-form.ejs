@@ -48,7 +48,7 @@
           >
             <% classes.forEach(aClass => { %>
             <option 
-              value="<% aClass.id %>"
+              value="<%= aClass.id %>"
               <%= aClass.id == animal.classId ? 'selected'  : '' %>
             >
               <%= aClass.name %>
@@ -68,7 +68,7 @@
           >
             <% families.forEach(family => { %>
             <option 
-              value="<% family.id %>"
+              value="<%= family.id %>"
               <%= family.id == animal.familyId ? 'selected'  : '' %>
             >
               <%= family.name %>
@@ -88,7 +88,7 @@
           >
             <% statuses.forEach(status => { %>
             <option
-              value="<% status.id %>"
+              value="<%= status.id %>"
               <%= status.id == animal.statusId ? 'selected'  : '' %>
             >
               <%= status.name %> (<%= status.abbreviation %>)
