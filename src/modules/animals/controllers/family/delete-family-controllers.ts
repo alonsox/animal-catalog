@@ -1,7 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import { NotFound } from '../../../shared/errors';
 import { PreDeleteFamilyAnimalDto } from '../../dto/family/pre-delete-family-dto';
-import { familyRoutes, fullRouteOf } from '../../routes/routes.config';
+import {
+  animalRoutes,
+  familyRoutes,
+  fullRouteOf,
+} from '../../routes/routes.config';
 import { deleteFamily } from '../../use-cases/family/delete-family';
 import { FamilyInUseError } from '../../use-cases/family/errors/family-in-use-error';
 import { FamilyNotFoundError } from '../../use-cases/family/errors/family-not-found-error';
@@ -75,7 +79,6 @@ function renderDeleteForm(res: Response, data: DeleteFamilyData) {
 function toTemplateAnimal(animal: PreDeleteFamilyAnimalDto) {
   return <TemplateAnimal>{
     name: animal.name,
-    // TODO: Should use the animal routes
-    detailsUrl: '',
+    detailsUrl: fullRouteOf(animalRoutes.getDetails(animal.id)),
   };
 }
