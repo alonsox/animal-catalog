@@ -62,6 +62,10 @@ import {
   handleUpdateAnimal,
   showUpdateAnimalForm,
 } from '../controllers/animal/update-animal.controller';
+import {
+  handleDeleteAnimal,
+  showDeleteAnimalForm,
+} from '../controllers/animal/delete.animal.controller';
 
 const catalogRoutes = Router();
 
@@ -125,16 +129,13 @@ catalogRoutes
   .route(conStatusesRoutes.getAll())
   .get(showAllconservationStatuses);
 
-// TODO: Delete the wip
-const wip = (x: string) => (_: any, res: any) => res.send(x);
-
 /*
  * ANIMALS
  */
 catalogRoutes
   .route(animalRoutes.delete())
-  .get(wip('Showing delete animal form...'))
-  .post(wip('Deleting animal...'));
+  .get(showDeleteAnimalForm)
+  .post(handleDeleteAnimal);
 
 catalogRoutes
   .route(animalRoutes.update())
