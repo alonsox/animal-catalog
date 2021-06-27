@@ -2,7 +2,18 @@
   class="navbar navbar-dark bg-primary navbar-expand-sm justify-content-between"
 >
   <div class="container-lg">
-    <a href="/" class="navbar-brand">Animal Catalog</a>
+    <%# LOGO AND APP NAME %>
+    <a class="navbar-brand" href="/">
+      <img
+        src="/img/fox-icon.svg"
+        width="30"
+        height="30"
+        class="d-inline-block align-top"
+        alt=""
+      />
+      <span>Animal Catalog</span>
+    </a>
+    <%# NAVBAR TOGGLER %>
     <button
       class="navbar-toggler"
       type="button"
@@ -11,6 +22,7 @@
     >
       <span class="navbar-toggler-icon p-0" style="font-size: 14px"></span>
     </button>
+    <%# CATALOG LINKS %>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <% if (currentUser) { %>
       <nav class="navbar-nav ml-2">
@@ -21,7 +33,7 @@
           >Conservation Statuses</a
         >
       </nav>
-      <% } %>
+      <% } %> <%# USER LINKS %>
       <nav class="navbar-nav ml-auto">
         <% if (!currentUser) { %>
         <a
@@ -37,12 +49,22 @@
           >Sign Up</a
         >
         <% } else { %>
-        <a
-          href="/auth/log-out"
-          type="button"
-          class="btn btn-sm btn-outline-light nav-item mx-1 my-1"
-          >Log Out</a
-        >
+        <div class="dropdown">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <%= currentUser.firstName + ' ' + currentUser.lastName %>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">My Account</a>
+            <a class="dropdown-item" href="/auth/log-out">Log out</a>
+          </div>
+        </div>
         <% } %>
       </nav>
     </div>
