@@ -1,3 +1,4 @@
+import { LeanDocument } from 'mongoose';
 import { AnimalDocument } from '../../models/animal';
 
 interface BasicAnimalDtoProps {
@@ -9,6 +10,10 @@ interface BasicAnimalDtoProps {
 
 export class BasicAnimalDto {
   constructor(private props: BasicAnimalDtoProps) {}
+
+  get id() {
+    return this.props.id;
+  }
 
   get name() {
     return this.props.name;
@@ -23,9 +28,9 @@ export class BasicAnimalDto {
   }
 }
 
-export function toBasicAnimalDto(animal: AnimalDocument) {
+export function toBasicAnimalDto(animal: LeanDocument<AnimalDocument>) {
   return new BasicAnimalDto({
-    id: animal.id,
+    id: animal._id.toString(),
     name: animal.name,
     scientificName: animal.scientificName,
     photoSrc: animal.photoSrc,

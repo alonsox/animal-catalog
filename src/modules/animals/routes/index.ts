@@ -52,6 +52,7 @@ import {
   validateCreateAnimal,
   validateUpdateAnimal,
 } from '../validators/animal.validators';
+import { showAllAnimals } from '../controllers/animal/get-all-animals.controller';
 
 const catalogRoutes = Router();
 
@@ -140,7 +141,7 @@ catalogRoutes
   .route(animalRoutes.getDetails())
   .get(wip('Getting single animal'));
 
-catalogRoutes.route(animalRoutes.getAll()).get(wip('Getting all animals'));
+catalogRoutes.route(animalRoutes.getAll()).get(showAllAnimals);
 
 /**
  * EXPORTS

@@ -26,8 +26,7 @@
           <li
             class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
           >
-            <h3><%= animal.name %></h3>
-            <p><i><% animal.scientificName %> </i></p>
+            <h3><%= animal.name %> (<i><%= animal.scientificName %></i>)</h3>
             <div>
               <a
                 href="<%= animal.updateUrl %>"

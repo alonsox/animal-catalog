@@ -1,5 +1,13 @@
-import { BasicAnimalDto } from '../../dto/animal/basic-animal.dto';
+import {
+  BasicAnimalDto,
+  toBasicAnimalDto,
+} from '../../dto/animal/basic-animal.dto';
+import { Animal } from '../../models/animal';
 
 export async function getAllAnimals(): Promise<BasicAnimalDto[]> {
-  throw new Error('Not Implemented yet');
+  const animals = await Animal.find({})
+    .select('name scientificName photoSrc')
+    .lean();
+
+  return animals.map(toBasicAnimalDto);
 }
