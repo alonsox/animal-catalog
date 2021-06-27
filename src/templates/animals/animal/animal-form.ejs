@@ -47,7 +47,12 @@
             class="form-control <% if (errors.class) { %>is-invalid<% } %>"
           >
             <% classes.forEach(aClass => { %>
-            <option value="<% aClass.id %>"><%= aClass.name %></option>
+            <option 
+              value="<% aClass.id %>"
+              <%= aClass.id == animal.classId ? 'selected'  : '' %>
+            >
+              <%= aClass.name %>
+            </option>
             <% }) %>
           </select>
           <div class="invalid-feedback"><%= errors.class %></div>
@@ -62,7 +67,12 @@
             class="form-control <% if (errors.family) { %>is-invalid<% } %>"
           >
             <% families.forEach(family => { %>
-            <option value="<% family.id %>"><%= family.name %></option>
+            <option 
+              value="<% family.id %>"
+              <%= family.id == animal.familyId ? 'selected'  : '' %>
+            >
+              <%= family.name %>
+            </option>
             <% }) %>
           </select>
           <div class="invalid-feedback"><%= errors.family %></div>
@@ -77,7 +87,10 @@
             class="form-control <% if (errors.status) { %>is-invalid<% } %>"
           >
             <% statuses.forEach(status => { %>
-            <option value="<% status.id %>">
+            <option
+              value="<% status.id %>"
+              <%= status.id == animal.statusId ? 'selected'  : '' %>
+            >
               <%= status.name %> (<%= status.abbreviation %>)
             </option>
             <% }) %>

@@ -58,6 +58,7 @@ import {
   showCreateAnimalForm,
 } from '../controllers/animal/create-animal.controller';
 import { showAnimalDetails } from '../controllers/animal/get-animal-details.controller';
+import { showUpdateAnimalForm } from '../controllers/animal/update-animal.controller';
 
 const catalogRoutes = Router();
 
@@ -134,7 +135,7 @@ catalogRoutes
 
 catalogRoutes
   .route(animalRoutes.update())
-  .get(wip('Showing update animal form...'))
+  .get(showUpdateAnimalForm)
   .post(validateUpdateAnimal(), wip('Updating animal...'));
 
 catalogRoutes
