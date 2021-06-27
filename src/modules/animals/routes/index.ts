@@ -57,6 +57,7 @@ import {
   handleCreateAnimal,
   showCreateAnimalForm,
 } from '../controllers/animal/create-animal.controller';
+import { showAnimalDetails } from '../controllers/animal/get-animal-details.controller';
 
 const catalogRoutes = Router();
 
@@ -141,9 +142,7 @@ catalogRoutes
   .get(showCreateAnimalForm)
   .post(validateCreateAnimal(), handleCreateAnimal);
 
-catalogRoutes
-  .route(animalRoutes.getDetails())
-  .get(wip('Getting single animal'));
+catalogRoutes.route(animalRoutes.getDetails()).get(showAnimalDetails);
 
 catalogRoutes.route(animalRoutes.getAll()).get(showAllAnimals);
 
