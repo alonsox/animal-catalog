@@ -1,0 +1,101 @@
+{{!-- TEMPLATE VARIABLES
+  * title: Title of the page 
+  * animal: An animal object to include when updating the form
+  * families: An array with all the families
+  * categories: An array with the name of all the categories
+  * statuses: An array with all the conservation statuses and their abbreviations
+  * errors: The object with the errors
+  * updatedAnimalId: true if the form renders an animal being updated
+ --}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../../partials/head-content.ejs') %>
+  </head>
+  <body>
+    <%- include('../../partials/navbar.ejs') %>
+    <div class="container-lg my-3">
+      <h1><% formTitle %></h1>
+      <form action="" method="post">
+        <%# NAME %>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-control <% if (errors.name) { %>is-invalid<% } %>"
+            placeholder="Puma"
+            autocomplete="off"
+            value="<%= name %>"
+          />
+          <div class="invalid-feedback"><%= errors.name %></div>
+        </div>
+
+        <%# SCIENTIFIC NAME %>
+        <div class="form-group">
+          <label for="scientificName">Scientific Name</label>
+          <input
+            type="text"
+            id="scientificName"
+            name="scientificName"
+            class="form-control font-italic <% if (errors.errors.scientificName) { %>is-invalid<% } %>"
+            placeholder="Puma Concolor"
+            autocomplete="off"
+            value="<%= scientificName %>"
+          />
+          <div class="invalid-feedback"><%= errors.scientificName %></div>
+        </div>
+
+        <%# CLASS %>
+        <div class="form-group">
+          <label for="class">Class</label>
+          <select name="class" id="class" class="form-control">
+            <% classes.forEach(aClass => { %> <%# TODO: See how to mark as
+            selected in case of update %>
+            <option value="<% aClass.id %>"><%= aClass.name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <%# FAMILY %>
+        <div class="form-group">
+          <label for="family">Family</label>
+          <select name="family" id="family" class="form-control">
+            <% families.forEach(family => { %> <%# TODO: See how to mark as
+            selected in case of update %>
+            <option value="<% family.id %>"><%= family.name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <%# CONSERVATION STATUS %>
+        <div class="form-group">
+          <label for="status">Conservation Status</label>
+          <select name="status" id="status" class="form-control">
+            <% statuses.forEach(status => { %> <%# TODO: See how to mark as
+            selected in case of update %>
+            <option value="<% status.id %>"><%= status.name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <%# DESCRIPTION %>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            class="form-control"
+            name="description"
+            id="description"
+            rows="5"
+          >
+<%= value description %></textarea
+          >
+        </div>
+
+        <%# SUBMIT BUTTON %>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+    </div>
+  </body>
+</html>
