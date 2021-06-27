@@ -6,11 +6,12 @@ import { animalRoutes, fullRouteOf } from '../../routes/routes.config';
 import { AnimalNotFoundError } from '../../use-cases/animal/animal-not-found-error';
 import { getAnimal } from '../../use-cases/animal/get-animal';
 import { updateAnimal } from '../../use-cases/animal/update-animal';
-import { getAllClasses } from '../../use-cases/class/get-all-classes';
-import { getAllConservationStatuses } from '../../use-cases/conservation-status/get-all-conservation-statuses';
-import { getAllFamilies } from '../../use-cases/family/get-all-families';
 import { AnimalvalidationErrors } from '../../validators/animal.validators';
-import { renderAnimalForm, toAnimalData } from './shared';
+import {
+  getAnimalFormsSelectInfo,
+  renderAnimalForm,
+  toAnimalData,
+} from './shared';
 
 const formTitle = 'Update Animal';
 
@@ -27,16 +28,11 @@ export async function showUpdateAnimalForm(
       next(new NotFound(result.message));
       return;
     }
-    const classes = await getAllClasses();
-    const families = await getAllFamilies();
-    const statuses = await getAllConservationStatuses();
 
     renderAnimalForm(res, {
       formTitle,
       animal: toAnimalData(result),
-      classes,
-      families,
-      statuses,
+      ...(await getAnimalFormsSelectInfo()),
     });
   } catch (err: any) {
     next(
@@ -56,10 +52,6 @@ export async function handleUpdateAnimal(
   // VALIDATE INPUT
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const classes = await getAllClasses();
-    const families = await getAllFamilies();
-    const statuses = await getAllConservationStatuses();
-
     renderAnimalForm(res, {
       formTitle,
       animal: {
@@ -71,9 +63,7 @@ export async function handleUpdateAnimal(
         familyId: req.body.family,
         statusId: req.body.status,
       },
-      classes,
-      families,
-      statuses,
+      ...(await getAnimalFormsSelectInfo()),
       errors: getErrorMessages<AnimalvalidationErrors>(errors),
     });
     return;

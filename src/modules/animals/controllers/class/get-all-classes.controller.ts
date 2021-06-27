@@ -1,5 +1,7 @@
 import { Response, NextFunction, Request } from 'express';
 import { UnknownError } from '../../../shared/errors';
+import { capitalizeAll } from '../../../shared/utils/formatters';
+import { BasicClassDto } from '../../dto/class/basic-class-dto';
 import { fullRouteOf, classRoutes } from '../../routes/routes.config';
 import { getAllClasses } from '../../use-cases/class/get-all-classes';
 
@@ -9,15 +11,7 @@ export async function showAllClasses(
   next: NextFunction,
 ) {
   try {
-    const classes = (await getAllClasses()).map(
-      (theClass) =>
-        <TemplateClass>{
-          name: theClass.name,
-          updateUrl: fullRouteOf(classRoutes.update(theClass.id)),
-          deleteUrl: fullRouteOf(classRoutes.delete(theClass.id)),
-          detailsUrl: fullRouteOf(classRoutes.getDetails(theClass.id)),
-        },
-    );
+    const classes = (await getAllClasses()).map(toTemplateClass);
 
     // Show classes
     renderAllClasses(res, {
@@ -39,6 +33,15 @@ interface TemplateClass {
 interface AllClassesData {
   createUrl: string;
   classes: TemplateClass[];
+}
+
+function toTemplateClass(theClass: BasicClassDto): TemplateClass {
+  return {
+    name: capitalizeAll(theClass.name),
+    updateUrl: fullRouteOf(classRoutes.update(theClass.id)),
+    deleteUrl: fullRouteOf(classRoutes.delete(theClass.id)),
+    detailsUrl: fullRouteOf(classRoutes.getDetails(theClass.id)),
+  };
 }
 
 function renderAllClasses(res: Response, data: AllClassesData) {

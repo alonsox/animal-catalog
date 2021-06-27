@@ -27,7 +27,8 @@ const baseValidators = [
     .withMessage(nameErrors.notExists)
     .trim()
     .notEmpty()
-    .withMessage(nameErrors.isEmpty),
+    .withMessage(nameErrors.isEmpty)
+    .toLowerCase(),
 
   // DESCRIPTION
   body('description')

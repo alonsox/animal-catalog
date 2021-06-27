@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { UnknownError } from '../../../shared/errors';
+import { capitalizeAll, toLower } from '../../../shared/utils/formatters';
 import { BasicAnimalDto } from '../../dto/animal/basic-animal.dto';
 import { animalRoutes, fullRouteOf } from '../../routes/routes.config';
 import { getAllAnimals } from '../../use-cases/animal/get-all-animals';
@@ -44,8 +45,8 @@ function renderAllAnimals(res: Response, data: AllAnimalsData) {
 
 function toTemplateAnimal(animal: BasicAnimalDto): TemplateAnimal {
   return {
-    name: animal.name,
-    scientificName: animal.scientificName,
+    name: capitalizeAll(animal.name),
+    scientificName: toLower(animal.scientificName),
     photoSrc: animal.photoSrc,
     deleteUrl: fullRouteOf(animalRoutes.delete(animal.id)),
     updateUrl: fullRouteOf(animalRoutes.update(animal.id)),

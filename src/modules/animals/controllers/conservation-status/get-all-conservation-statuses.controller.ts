@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { UnknownError } from '../../../shared/errors';
+import { capitalizeAll } from '../../../shared/utils/formatters';
+import { BasicConservationStatusDto } from '../../dto/conservation-status/basic-conservation-status.dto';
 import { conStatusesRoutes, fullRouteOf } from '../../routes/routes.config';
 import { getAllConservationStatuses } from '../../use-cases/conservation-status/get-all-conservation-statuses';
 
@@ -10,12 +12,7 @@ export async function showAllconservationStatuses(
 ) {
   try {
     const statuses = (await getAllConservationStatuses()).map(
-      (status) =>
-        <TemplateConservationStatus>{
-          name: status.name,
-          updateUrl: fullRouteOf(conStatusesRoutes.update(status.id)),
-          detailsUrl: fullRouteOf(conStatusesRoutes.getDetails(status.id)),
-        },
+      toTemplateConservationStatus,
     );
 
     // Show conservation statuses
@@ -44,4 +41,14 @@ function renderAllStatuses(res: Response, data: AllConStatusesData) {
     title: 'Animal Catalog | All conservation statuses',
     ...data,
   });
+}
+
+function toTemplateConservationStatus(
+  status: BasicConservationStatusDto,
+): TemplateConservationStatus {
+  return {
+    name: capitalizeAll(status.name),
+    updateUrl: fullRouteOf(conStatusesRoutes.update(status.id)),
+    detailsUrl: fullRouteOf(conStatusesRoutes.getDetails(status.id)),
+  };
 }

@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { NotFound, UnknownError } from '../../../shared/errors';
+import { capitalizeAll } from '../../../shared/utils/formatters';
 import { animalRoutes, fullRouteOf } from '../../routes/routes.config';
 import { AnimalNotFoundError } from '../../use-cases/animal/animal-not-found-error';
 import { deleteAnimal } from '../../use-cases/animal/delete-animal';
@@ -18,9 +19,7 @@ export async function showDeleteAnimalForm(
       next(new NotFound(result.message));
     }
 
-    renderAnimalDeleteForm(res, {
-      animalName: result.name,
-    });
+    renderAnimalDeleteForm(res, { animalName: capitalizeAll(result.name) });
   } catch (err: any) {
     next(
       new UnknownError(

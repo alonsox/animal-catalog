@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { NotFound } from '../../../shared/errors';
+import { capitalizeAll } from '../../../shared/utils/formatters';
 import { PreDeleteFamilyAnimalDto } from '../../dto/family/pre-delete-family-dto';
 import {
   animalRoutes,
@@ -49,7 +50,7 @@ export async function handleDeleteFamily(
   if (result instanceof FamilyInUseError) {
     const family = await getFamily({ id: familyId });
     renderDeleteForm(res, {
-      familyName: family.name,
+      familyName: capitalizeAll(family.name),
       animals: result.animals.map(toTemplateAnimal),
     });
     return;
@@ -78,7 +79,7 @@ function renderDeleteForm(res: Response, data: DeleteFamilyData) {
 
 function toTemplateAnimal(animal: PreDeleteFamilyAnimalDto) {
   return <TemplateAnimal>{
-    name: animal.name,
+    name: capitalizeAll(animal.name),
     detailsUrl: fullRouteOf(animalRoutes.getDetails(animal.id)),
   };
 }

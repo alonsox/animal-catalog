@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { NotFound } from '../../../shared/errors';
+import { capitalizeAll } from '../../../shared/utils/formatters';
 import { PreDeleteClassAnimalDto } from '../../dto/class/pre-delete-class-dto';
 import {
   animalRoutes,
@@ -25,7 +26,7 @@ export async function showDeleteClassForm(
   }
 
   renderDeleteForm(res, {
-    className: result.className,
+    className: capitalizeAll(result.className),
     animals: result.animals.map(toTemplateAnimal),
   });
 }
@@ -50,7 +51,7 @@ export async function handleDeleteClass(
   if (result instanceof ClassInUseError) {
     const theClass = await getClass({ id: classId });
     renderDeleteForm(res, {
-      className: theClass.name,
+      className: capitalizeAll(theClass.name),
       animals: result.animals.map(toTemplateAnimal),
     });
     return;
@@ -79,7 +80,7 @@ function renderDeleteForm(res: Response, data: DeleteClassData) {
 
 function toTemplateAnimal(animal: PreDeleteClassAnimalDto) {
   return <TemplateAnimal>{
-    name: animal.name,
+    name: capitalizeAll(animal.name),
     detailsUrl: fullRouteOf(animalRoutes.getDetails(animal.id)),
   };
 }

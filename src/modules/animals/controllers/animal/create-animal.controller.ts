@@ -4,24 +4,15 @@ import { UnknownError } from '../../../shared/errors';
 import { getErrorMessages } from '../../../shared/utils';
 import { animalRoutes, fullRouteOf } from '../../routes/routes.config';
 import { createAnimal } from '../../use-cases/animal/create-animal';
-import { getAllClasses } from '../../use-cases/class/get-all-classes';
-import { getAllConservationStatuses } from '../../use-cases/conservation-status/get-all-conservation-statuses';
-import { getAllFamilies } from '../../use-cases/family/get-all-families';
 import { AnimalvalidationErrors } from '../../validators/animal.validators';
-import { renderAnimalForm } from './shared';
+import { getAnimalFormsSelectInfo, renderAnimalForm } from './shared';
 
 const formTitle = 'Create Animal';
 
 export async function showCreateAnimalForm(req: Request, res: Response) {
-  const classes = await getAllClasses();
-  const families = await getAllFamilies();
-  const statuses = await getAllConservationStatuses();
-
   renderAnimalForm(res, {
     formTitle,
-    classes,
-    families,
-    statuses,
+    ...(await getAnimalFormsSelectInfo()),
   });
 }
 
@@ -33,10 +24,6 @@ export async function handleCreateAnimal(
   // VALIDATE INPUT
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const classes = await getAllClasses();
-    const families = await getAllFamilies();
-    const statuses = await getAllConservationStatuses();
-
     renderAnimalForm(res, {
       formTitle,
       animal: {
@@ -48,9 +35,7 @@ export async function handleCreateAnimal(
         familyId: req.body.family,
         statusId: req.body.status,
       },
-      classes,
-      families,
-      statuses,
+      ...(await getAnimalFormsSelectInfo()),
       errors: getErrorMessages<AnimalvalidationErrors>(errors),
     });
     return;

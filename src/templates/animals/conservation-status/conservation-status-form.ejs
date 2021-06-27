@@ -33,7 +33,7 @@
             class="form-control <% if (errors.abbreviation) { %>is-invalid<% } %>"
             placeholder="LC"
             autocomplete="off"
-            value="<%= abbreviation.toUpperCase() %>"
+            value="<%= abbreviation %>"
           />
           <div class="invalid-feedback"><%= errors.abbreviation %></div>
         </div>
