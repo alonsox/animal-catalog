@@ -23,9 +23,9 @@ export class ClassDto {
 }
 
 /** Converts a class document to a DTO */
-export function classDocumentToDto(classDoc: ClassDocument): ClassDto {
+export function toClassDto(classDoc: ClassDocument): ClassDto {
   return new ClassDto({
-    id: classDoc.id,
+    id: classDoc._id,
     name: classDoc.name,
     description: classDoc.description,
   });

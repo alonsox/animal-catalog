@@ -1,4 +1,4 @@
-import { classDocumentToDto, ClassDto } from '../../dto/class/class-dto';
+import { toClassDto, ClassDto } from '../../dto/class/class-dto';
 import { UpdateClassDto } from '../../dto/class/update-class-dto';
 import { Class } from '../../models/class';
 import { ClassNotFoundError } from './errors/class-not-found';
@@ -14,7 +14,7 @@ export async function updateClass(
       return new ClassNotFoundError(classId);
     }
 
-    return classDocumentToDto(document);
+    return toClassDto(document);
   } catch (err: any) {
     return new ClassNotFoundError(classId);
   }
