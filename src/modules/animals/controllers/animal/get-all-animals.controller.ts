@@ -12,8 +12,6 @@ export async function showAllAnimals(
   try {
     const animals = (await getAllAnimals()).map(toTemplateAnimal);
 
-    console.log('ANIMALS=', animals);
-
     renderAllAnimals(res, {
       animals,
       createUrl: fullRouteOf(animalRoutes.create()),

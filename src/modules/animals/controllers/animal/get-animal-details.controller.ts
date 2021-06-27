@@ -24,8 +24,6 @@ export async function showAnimalDetails(
     }
 
     // OK
-    console.log(await toAnimalDetails(result));
-
     renderAnimalDetails(res, await toAnimalDetails(result));
   } catch (err: any) {
     next(
