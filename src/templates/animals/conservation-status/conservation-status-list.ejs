@@ -20,6 +20,7 @@
           >
             <h3><%= status.name %></h3>
             <div>
+              <% if (currentUser && currentUser.isAdmin) { %>
               <a
                 href="<%= status.updateUrl %>"
                 class="text-decoration-none text-white mr-2"
@@ -30,6 +31,7 @@
                   <i class="material-icons small">edit</i>
                 </button>
               </a>
+              <% } %>
             </div>
           </li>
         </a>

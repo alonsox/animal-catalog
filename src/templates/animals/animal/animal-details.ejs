@@ -9,12 +9,15 @@
   <div class="d-flex justify-content-between align-items-center my-3">
     <h1 class=""><%= name %></h1>
     <div>
+      <% if (currentUser && currentUser.isAdmin) { %>
+       
       <a href="<%= updateUrl %>" class="text-decoration-none text-white mr-2">
         <button class="btn btn-primary">Update</button>
       </a>
       <a href="<%= deleteUrl %>" class="text-decoration-none text-white">
         <button class="btn btn-danger">Delete</button>
       </a>
+      <% } %>
     </div>
   </div>
   <h3 class="mb-3 font-italic text-secondary"><%= scientificName %> </h3>

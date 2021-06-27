@@ -12,6 +12,7 @@
       <span class="navbar-toggler-icon p-0" style="font-size: 14px"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <% if (currentUser) { %>
       <nav class="navbar-nav ml-2">
         <a href="/catalog/animals" class="nav-link">Animals</a>
         <a href="/catalog/classes" class="nav-link">Classes</a>
@@ -20,6 +21,7 @@
           >Conservation Statuses</a
         >
       </nav>
+      <% } %>
       <nav class="navbar-nav ml-auto">
         <% if (!currentUser) { %>
         <a
