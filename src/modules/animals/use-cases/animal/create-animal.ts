@@ -1,8 +1,12 @@
-import { AnimalDto } from '../../dto/animal/animal.dto';
+import { AnimalDto, toAnimalDto } from '../../dto/animal/animal.dto';
 import { CreateAnimalDto } from '../../dto/animal/create-animal.dto';
+import { Animal } from '../../models/animal';
 
 export async function createAnimal(
   animalInfo: CreateAnimalDto,
 ): Promise<AnimalDto> {
-  throw new Error('Not Implemented yet');
+  const newAnimal = new Animal(animalInfo);
+  await newAnimal.save();
+
+  return toAnimalDto(newAnimal);
 }

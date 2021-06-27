@@ -89,9 +89,13 @@ const baseValidators = [
     .notEmpty()
     .withMessage(classErrors.isEmpty)
     .custom(async (value: string) => {
-      const classExists = await Class.exists({ _id: value });
+      try {
+        const classExists = await Class.exists({ _id: value });
 
-      if (!classExists) {
+        if (!classExists) {
+          throw new Error(classErrors.notFound);
+        }
+      } catch (err: any) {
         throw new Error(classErrors.notFound);
       }
     }),
@@ -104,9 +108,13 @@ const baseValidators = [
     .notEmpty()
     .withMessage(familyErrors.isEmpty)
     .custom(async (value: string) => {
-      const familyExists = await Family.exists({ _id: value });
+      try {
+        const familyExists = await Family.exists({ _id: value });
 
-      if (!familyExists) {
+        if (!familyExists) {
+          throw new Error(familyErrors.notFound);
+        }
+      } catch (err: any) {
         throw new Error(familyErrors.notFound);
       }
     }),
@@ -119,9 +127,13 @@ const baseValidators = [
     .notEmpty()
     .withMessage(statusErrors.isEmpty)
     .custom(async (value: string) => {
-      const statusExists = await ConservationStatus.exists({ _id: value });
+      try {
+        const statusExists = await ConservationStatus.exists({ _id: value });
 
-      if (!statusExists) {
+        if (!statusExists) {
+          throw new Error(statusErrors.notFound);
+        }
+      } catch (e: any) {
         throw new Error(statusErrors.notFound);
       }
     }),
@@ -142,6 +154,17 @@ export function validateCreateAnimal() {
         throw new Error(nameErrors.alreadyExists);
       }
     }),
+
+    // SCIENTIFIC NAME
+    body('scientificName').custom(async (value) => {
+      const animalExists = await Animal.exists({
+        scientificName: value.toLowerCase(),
+      });
+
+      if (animalExists) {
+        throw new Error(scientificNameErrors.alreadyExists);
+      }
+    }),
   ];
 }
 
@@ -150,19 +173,31 @@ export function validateUpdateAnimal() {
   return [
     ...baseValidators,
     body('name').custom(async (value, { req }) => {
-      // TODO: check this
-      const existingAnimal = await Animal.findOne(
-        {
-          name: value.toLowerCase(),
-        },
-        'name',
-      ).exec();
+      const existingAnimal = await Animal.findOne({
+        name: value.toLowerCase(),
+      }).lean();
 
       if (!existingAnimal) {
         return;
       }
 
-      const animalBeingUpdatedId = req.body.updatedAnimalId.toString();
+      const animalBeingUpdatedId = req.params?.id;
+      if (animalBeingUpdatedId !== existingAnimal._id.toString()) {
+        throw new Error(nameErrors.alreadyExists);
+      }
+    }),
+
+    // SCIENTIFIC NAME
+    body('scientificName').custom(async (value, { req }) => {
+      const existingAnimal = await Animal.findOne({
+        scientificName: value.toLowerCase(),
+      }).lean();
+
+      if (!existingAnimal) {
+        return;
+      }
+
+      const animalBeingUpdatedId = req.params?.id;
       if (animalBeingUpdatedId !== existingAnimal._id.toString()) {
         throw new Error(nameErrors.alreadyExists);
       }

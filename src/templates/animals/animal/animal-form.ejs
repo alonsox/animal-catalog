@@ -41,49 +41,62 @@
         <%# CLASS %>
         <div class="form-group">
           <label for="class">Class</label>
-          <select name="class" id="class" class="form-control">
-            <% classes.forEach(aClass => { %> <%# TODO: See how to mark as
-            selected in case of update %>
+          <select
+            name="class"
+            id="class"
+            class="form-control <% if (errors.class) { %>is-invalid<% } %>"
+          >
+            <% classes.forEach(aClass => { %>
             <option value="<% aClass.id %>"><%= aClass.name %></option>
             <% }) %>
           </select>
+          <div class="invalid-feedback"><%= errors.class %></div>
         </div>
 
         <%# FAMILY %>
         <div class="form-group">
           <label for="family">Family</label>
-          <select name="family" id="family" class="form-control">
-            <% families.forEach(family => { %> <%# TODO: See how to mark as
-            selected in case of update %>
+          <select
+            name="family"
+            id="family"
+            class="form-control <% if (errors.family) { %>is-invalid<% } %>"
+          >
+            <% families.forEach(family => { %>
             <option value="<% family.id %>"><%= family.name %></option>
             <% }) %>
           </select>
+          <div class="invalid-feedback"><%= errors.family %></div>
         </div>
 
         <%# CONSERVATION STATUS %>
         <div class="form-group">
           <label for="status">Conservation Status</label>
-          <select name="status" id="status" class="form-control">
-            <% statuses.forEach(status => { %> <%# TODO: See how to mark as
-            selected in case of update %>
+          <select
+            name="status"
+            id="status"
+            class="form-control <% if (errors.status) { %>is-invalid<% } %>"
+          >
+            <% statuses.forEach(status => { %>
             <option value="<% status.id %>">
               <%= status.name %> (<%= status.abbreviation %>)
             </option>
             <% }) %>
           </select>
+          <div class="invalid-feedback"><%= errors.status %></div>
         </div>
 
         <%# DESCRIPTION %>
         <div class="form-group">
           <label for="description">Description</label>
           <textarea
-            class="form-control"
+            class="form-control <% if (errors.description) { %>is-invalid<% } %>"
             name="description"
             id="description"
             rows="5"
           >
 <%= animal.description %></textarea
           >
+          <div class="invalid-feedback"><%= errors.description %></div>
         </div>
 
         <%# SUBMIT BUTTON %>
