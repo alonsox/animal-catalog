@@ -1,8 +1,11 @@
-import { familyDocumentToDto, FamilyDto } from '../../dto/family/family-dto';
+import {
+  BasicFamilyDto,
+  toBasicFamilyDto,
+} from '../../dto/family/basic-family-dto';
 import { Family } from '../../models/family';
 
-export async function getAllFamilies(): Promise<FamilyDto[]> {
-  const document = await Family.find({}).exec();
+export async function getAllFamilies(): Promise<BasicFamilyDto[]> {
+  const documents = await Family.find({}).select('-description').lean();
 
-  return document.map(familyDocumentToDto);
+  return documents.map(toBasicFamilyDto);
 }

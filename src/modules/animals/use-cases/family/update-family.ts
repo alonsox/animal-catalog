@@ -1,4 +1,4 @@
-import { familyDocumentToDto, FamilyDto } from '../../dto/family/family-dto';
+import { toFamilyDto, FamilyDto } from '../../dto/family/family-dto';
 import { UpdateFamilyDto } from '../../dto/family/update-family-dto';
 import { Family } from '../../models/family';
 import { FamilyNotFoundError } from './errors/family-not-found-error';
@@ -14,7 +14,7 @@ export async function updateFamily(
       return new FamilyNotFoundError(familyId);
     }
 
-    return familyDocumentToDto(document);
+    return toFamilyDto(document);
   } catch (err: any) {
     return new FamilyNotFoundError(familyId);
   }

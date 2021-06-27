@@ -22,7 +22,7 @@ export class FamilyDto {
   }
 }
 
-export function familyDocumentToDto(familyDoc: ClassDocument): FamilyDto {
+export function toFamilyDto(familyDoc: ClassDocument): FamilyDto {
   return new FamilyDto({
     id: familyDoc.id,
     name: familyDoc.name,

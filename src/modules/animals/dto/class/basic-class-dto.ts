@@ -23,7 +23,7 @@ export function toBasicClassDto(
   classDoc: LeanDocument<ClassDocument>,
 ): BasicClassDto {
   return new BasicClassDto({
-    id: classDoc._id,
+    id: classDoc._id.toString(),
     name: classDoc.name,
   });
 }

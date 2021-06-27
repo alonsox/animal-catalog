@@ -22,7 +22,7 @@ export function toBasicFamilyDto(
   familyDoc: LeanDocument<ClassDocument>,
 ): BasicFamilyDto {
   return new BasicFamilyDto({
-    id: familyDoc._id,
+    id: familyDoc._id.toString(),
     name: familyDoc.name,
   });
 }

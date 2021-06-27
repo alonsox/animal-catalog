@@ -1,7 +1,7 @@
 import { Animal } from '../../models/animal';
 import { Family } from '../../models/family';
 import { DeleteFamilyDto } from '../../dto/family/delete-family-dto';
-import { familyDocumentToDto, FamilyDto } from '../../dto/family/family-dto';
+import { toFamilyDto, FamilyDto } from '../../dto/family/family-dto';
 import { toPreDeleteFamilyAnimalDto } from '../../dto/family/pre-delete-family-dto';
 import { FamilyInUseError } from './errors/family-in-use-error';
 import { FamilyNotFoundError } from './errors/family-not-found-error';
@@ -29,7 +29,7 @@ export async function deleteFamily(
     }
 
     // All ok
-    return familyDocumentToDto(await familyDoc.remove());
+    return toFamilyDto(await familyDoc.remove());
   } catch (err: any) {
     return new FamilyNotFoundError(classId);
   }
