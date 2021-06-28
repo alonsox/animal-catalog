@@ -215,20 +215,14 @@ export function validateUpdateUser() {
     body('oldPassword')
       .if(body('newPassword').exists().trim().notEmpty())
       .custom(async (value: string, { req }) => {
-        const userBeingUpdatedId = req.params?.id;
-
         try {
-          const existingUser = await User.findOne({ username: value });
+          const user = await User.findById(req.params?.id);
 
-          if (!existingUser) {
+          if (!user) {
             throw new Error(oldPasswordErrors.isIncorrect);
           }
 
-          if (userBeingUpdatedId !== existingUser._id.toString()) {
-            throw new Error(oldPasswordErrors.isIncorrect);
-          }
-
-          if (!(await comparePwd(value, existingUser.password))) {
+          if (!(await comparePwd(value, user.password))) {
             throw new Error(oldPasswordErrors.isIncorrect);
           }
         } catch (err: any) {

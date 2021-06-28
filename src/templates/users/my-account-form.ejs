@@ -57,7 +57,7 @@
         <div class="form-group">
           <label class="text-secondary" for="newPassword">New Password</label>
           <input
-            type="newPassword"
+            type="password"
             id="newPassword"
             name="newPassword"
             class="form-control <% if (errors.newPassword) { %>is-invalid<% } %>"
@@ -81,7 +81,7 @@
 
         <%# OLD PASSWORD %>
         <div class="form-group">
-          <label class="text-secondary" for="password">New Password</label>
+          <label class="text-secondary" for="password">Old Password</label>
           <input
             type="password"
             id="oldPassword"
@@ -91,8 +91,25 @@
           <div class="invalid-feedback"><%= errors.oldPassword %></div>
         </div>
 
-        <button type="submit" class="btn btn-block btn-primary mt-4">
+        <button type="submit" class="btn btn-block btn-primary mt-5">
           Save
+        </button>
+      </form>
+
+      <hr />
+      <form
+        action="<%= deleteUserUrl %> "
+        method="post"
+        class="border px-3 py-4 rounded"
+      >
+        <h1 class="text-center text-danger">Delete Account</h1>
+        <p class="">
+          This action cannot be undone. Once you delete your account, there is
+          no going back. Please be certain.
+        </p>
+
+        <button type="submit" class="btn btn-block btn-danger mt-4">
+          Delete Account
         </button>
       </form>
     </div>

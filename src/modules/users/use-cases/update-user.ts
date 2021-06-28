@@ -15,16 +15,38 @@ export async function updateUser(
       return new UserNotFoundError(userId);
     }
 
+    const newPassword = updateFields.password
+      ? await hashPwd(updateFields.password)
+      : user.password;
+
     // Update user info
-    user.firstName = updateFields.firstName || user.firstName;
-    user.lastName = updateFields.lastName || user.lastName;
-    user.username = updateFields.username || user.username;
-    if (updateFields.password) {
-      user.password = await hashPwd(updateFields.password);
+    const userUpdated = await User.findByIdAndUpdate(
+      userId,
+      {
+        firstName: updateFields.firstName || user.firstName,
+        lastName: updateFields.lastName || user.lastName,
+        username: updateFields.username || user.username,
+        password: newPassword,
+      },
+      {
+        new: true,
+      },
+    );
+
+    if (!userUpdated) {
+      return new UserNotFoundError(userId);
     }
 
+    // user.firstName = updateFields.firstName || user.firstName;
+    // user.lastName = updateFields.lastName || user.lastName;
+    // user.username = updateFields.username || user.username;
+    // if (updateFields.password) {
+    //   user.password = await hashPwd(updateFields.password);
+    // }
+
     // Save changes
-    return toUserDto(await user.save());
+    // TODO: usar findAndUpdate
+    return toUserDto(userUpdated);
   } catch (err: any) {
     return new UserNotFoundError(userId);
   }

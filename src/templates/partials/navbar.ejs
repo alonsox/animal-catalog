@@ -61,7 +61,11 @@
             <%= currentUser.firstName + ' ' + currentUser.lastName %>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">My Account</a>
+            <a
+              class="dropdown-item"
+              href="/users/my-account/<%= currentUser.id %> "
+              >My Account</a
+            >
             <a class="dropdown-item" href="/auth/log-out">Log out</a>
           </div>
         </div>
