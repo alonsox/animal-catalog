@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { NotFound, UnknownError } from '../../shared/errors';
+import { userRouteOf, routes } from '../routes/routes.config';
 import { getUser } from '../use-cases/get-user-details';
 import { UserNotFoundError } from '../use-cases/user-not-found-error';
 import { UpdateUserErrors } from '../validators/user.validators';
@@ -23,7 +24,8 @@ export async function showMyAccountDetailsForm(
       firstName: result.firstName,
       lastName: result.lastName,
       username: result.username,
-      updatePostUrl: `/users/my-account/update/${userId}`, // TODO: Fix this url
+      deleteUserUrl: userRouteOf(routes.delete(userId)),
+      updateUserUrl: userRouteOf(routes.update(userId)),
     });
   } catch (error: any) {
     next(
@@ -39,7 +41,8 @@ interface UpdateUserTemplate {
   firstName: string;
   lastName: string;
   username: string;
-  updatePostUrl: string;
+  updateUserUrl: string;
+  deleteUserUrl: string;
   errors?: UpdateUserErrors;
 }
 

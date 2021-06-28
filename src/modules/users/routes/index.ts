@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { handleDeleteUser } from '../controllers/delete-user.controller';
 import { showMyAccountDetailsForm } from '../controllers/shared.controller';
 import {
   checkAccountConfirmation,
@@ -10,22 +11,32 @@ import {
   validateSignUp,
   validateUpdateUser,
 } from '../validators/user.validators';
+import { routes } from './routes.config';
 
 const usersRoutes = Router();
 
+/**
+ * SIGN UP
+ */
 usersRoutes
-  .route('/sign-up')
+  .route(routes.signUp())
   .get(showSignUpForm)
   .post(validateSignUp(), createNewAccount);
 
-usersRoutes.route('/sign-up/:confirmationCode').get(checkAccountConfirmation);
+usersRoutes.route(routes.confirmAccount()).get(checkAccountConfirmation);
 
-usersRoutes
-  .route('/my-account/update/:id')
-  .post(validateUpdateUser(), handleUpdateUser);
+/**
+ * ACCOUNT MANAGEMENT
+ */
+usersRoutes.route(routes.delete()).post(handleDeleteUser);
 
-usersRoutes.route('/my-account/:id').get(showMyAccountDetailsForm);
+usersRoutes.route(routes.update()).post(validateUpdateUser(), handleUpdateUser);
 
+usersRoutes.route(routes.getDetails()).get(showMyAccountDetailsForm);
+
+/*
+ * EXPORTS
+ */
 export { usersRoutes };
 
-export const usersMountPoint = '/users';
+export * from './routes.config';

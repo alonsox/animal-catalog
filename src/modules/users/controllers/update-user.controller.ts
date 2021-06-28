@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { NotFound, UnknownError } from '../../shared/errors';
 import { getErrorMessages } from '../../shared/utils';
+import { routes, userRouteOf } from '../routes/routes.config';
 import { updateUser } from '../use-cases/update-user';
 import { UserNotFoundError } from '../use-cases/user-not-found-error';
 import { UpdateUserErrors } from '../validators/user.validators';
@@ -20,7 +21,8 @@ export async function handleUpdateUser(
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       username: req.body.username,
-      updatePostUrl: `/users/my-account/update/${userId}`, // TODO: Fix this url
+      deleteUserUrl: userRouteOf(routes.delete(userId)),
+      updateUserUrl: userRouteOf(routes.update(userId)),
       errors: getErrorMessages<UpdateUserErrors>(errors),
     });
     return;
@@ -45,7 +47,8 @@ export async function handleUpdateUser(
       firstName: result.firstName,
       lastName: result.lastName,
       username: result.username,
-      updatePostUrl: `/users/my-account/update/${userId}`, // TODO: Fix this url
+      deleteUserUrl: userRouteOf(routes.delete(userId)),
+      updateUserUrl: userRouteOf(routes.update(userId)),
     });
   } catch (error: any) {
     next(
