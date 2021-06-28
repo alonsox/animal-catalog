@@ -12,7 +12,7 @@ export interface AuthorizationOptions {
 
 /**
  * Authorizes a user to do something. If there is no user authenticated it
- * redirects to the login page.
+ * fails with a forbidden error.
  */
 export function authorize(options: AuthorizationOptions) {
   return function authorizationMDW(
@@ -21,7 +21,7 @@ export function authorize(options: AuthorizationOptions) {
     next: NextFunction,
   ) {
     if (!req.user) {
-      res.redirect('/auth/log-in');
+      next(new ForbiddenError(authorizationErrors.notAuthorized));
       return;
     }
 

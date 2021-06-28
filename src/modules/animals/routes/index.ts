@@ -66,6 +66,7 @@ import {
   handleDeleteAnimal,
   showDeleteAnimalForm,
 } from '../controllers/animal/delete.animal.controller';
+import { authenticate, authorize } from '../../security/middleware';
 
 const catalogRoutes = Router();
 
@@ -74,82 +75,118 @@ const catalogRoutes = Router();
  */
 catalogRoutes
   .route(classRoutes.update())
-  .get(showUpdateClassForm)
-  .post(validateUpdateClass(), handleUpdateClass);
+  .get(authorize({ onlyAdmin: true }), showUpdateClassForm)
+  .post(
+    authorize({ onlyAdmin: true }),
+    validateUpdateClass(),
+    handleUpdateClass,
+  );
 
 catalogRoutes
   .route(classRoutes.delete())
-  .get(showDeleteClassForm)
-  .post(handleDeleteClass);
+  .get(authorize({ onlyAdmin: true }), showDeleteClassForm)
+  .post(authorize({ onlyAdmin: true }), handleDeleteClass);
 
 catalogRoutes
   .route(classRoutes.create())
-  .get(showCreateClassForm)
-  .post(validateCreateClass(), handleCreateClass);
+  .get(authorize({ onlyAdmin: true }), showCreateClassForm)
+  .post(
+    authorize({ onlyAdmin: true }),
+    validateCreateClass(),
+    handleCreateClass,
+  );
 
-catalogRoutes.route(classRoutes.getDetails()).get(showClassDetails);
+catalogRoutes
+  .route(classRoutes.getDetails())
+  .get(authenticate(), showClassDetails);
 
-catalogRoutes.route(classRoutes.getAll()).get(showAllClasses);
+catalogRoutes.route(classRoutes.getAll()).get(authenticate(), showAllClasses);
 
 /*
  * FAMILIES
  */
 catalogRoutes
   .route(familyRoutes.delete())
-  .get(showDeleteFamilyForm)
-  .post(handleDeleteFamily);
+  .get(authorize({ onlyAdmin: true }), showDeleteFamilyForm)
+  .post(authorize({ onlyAdmin: true }), handleDeleteFamily);
 
 catalogRoutes
   .route(familyRoutes.update())
-  .get(showUpdateFamilyForm)
-  .post(validateUpdateFamily(), handleUpdateFamily);
+  .get(authorize({ onlyAdmin: true }), showUpdateFamilyForm)
+  .post(
+    authorize({ onlyAdmin: true }),
+    validateUpdateFamily(),
+    handleUpdateFamily,
+  );
 
 catalogRoutes
   .route(familyRoutes.create())
-  .get(showCreateFamilyForm)
-  .post(validateCreateFamily(), handleCreateFamily);
+  .get(authorize({ onlyAdmin: true }), showCreateFamilyForm)
+  .post(
+    authorize({ onlyAdmin: true }),
+    validateCreateFamily(),
+    handleCreateFamily,
+  );
 
-catalogRoutes.route(familyRoutes.getDetails()).get(showFamilyDetails);
+catalogRoutes
+  .route(familyRoutes.getDetails())
+  .get(authenticate(), showFamilyDetails);
 
-catalogRoutes.route(familyRoutes.getAll()).get(showAllFafmilies);
+catalogRoutes
+  .route(familyRoutes.getAll())
+  .get(authenticate(), showAllFafmilies);
 
 /*
  * CONSERVATION STATUS
  */
 catalogRoutes
   .route(conStatusesRoutes.update())
-  .get(showUpdateConservationStatusForm)
-  .post(validateUpdateConservationStatus(), handleUpdateConservationStatus);
+  .get(authorize({ onlyAdmin: true }), showUpdateConservationStatusForm)
+  .post(
+    authorize({ onlyAdmin: true }),
+    validateUpdateConservationStatus(),
+    handleUpdateConservationStatus,
+  );
 
 catalogRoutes
   .route(conStatusesRoutes.getDetails())
-  .get(showConservationStatusDetails);
+  .get(authenticate(), showConservationStatusDetails);
 
 catalogRoutes
   .route(conStatusesRoutes.getAll())
-  .get(showAllconservationStatuses);
+  .get(authenticate(), showAllconservationStatuses);
 
 /*
  * ANIMALS
  */
 catalogRoutes
   .route(animalRoutes.delete())
-  .get(showDeleteAnimalForm)
-  .post(handleDeleteAnimal);
+  .get(authorize({ onlyAdmin: true }), showDeleteAnimalForm)
+  .post(authorize({ onlyAdmin: true }), handleDeleteAnimal);
 
 catalogRoutes
   .route(animalRoutes.update())
-  .get(showUpdateAnimalForm)
-  .post(validateUpdateAnimal(), handleUpdateAnimal);
+  .get(authorize({ onlyAdmin: true }), showUpdateAnimalForm)
+  .post(
+    authorize({ onlyAdmin: true }),
+    validateUpdateAnimal(),
+    handleUpdateAnimal,
+  );
 
 catalogRoutes
   .route(animalRoutes.create())
-  .get(showCreateAnimalForm)
-  .post(validateCreateAnimal(), handleCreateAnimal);
+  .get(authorize({ onlyAdmin: true }), showCreateAnimalForm)
+  .post(
+    authorize({ onlyAdmin: true }),
+    validateCreateAnimal(),
+    handleCreateAnimal,
+  );
 
-catalogRoutes.route(animalRoutes.getDetails()).get(showAnimalDetails);
+catalogRoutes
+  .route(animalRoutes.getDetails())
+  .get(authenticate(), showAnimalDetails);
 
-catalogRoutes.route(animalRoutes.getAll()).get(showAllAnimals);
+catalogRoutes.route(animalRoutes.getAll()).get(authenticate(), showAllAnimals);
 
 /**
  * EXPORTS

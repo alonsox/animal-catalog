@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { UnauthorizedError } from '../../shared/errors/unauthorized-error';
 
 /**
  * Returns a middleware where if the user is not logged in it redirects to the
@@ -15,6 +16,6 @@ export function authenticate() {
       return;
     }
 
-    res.redirect('/auth/log-in');
+    next(new UnauthorizedError('You must log in before access to this route'));
   };
 }
