@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head-content.ejs') %>
+  </head>
+  <body>
+    <%- include('../partials/navbar.ejs') %>
+    <!-- -->
+    <%# UPDATE USER FORM %>
+    <div class="container-lg py-4" style="max-width: 500px">
+      <form
+        action="<%= updatePostUrl %> "
+        method="post"
+        class="border px-3 py-4 rounded"
+      >
+        <h1 class="text-center">Account Details</h1>
+        <div class="form-group">
+          <%# FIRST NAME %>
+          <label class="text-secondary" for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            value="<%= firstName %>"
+            class="form-control <% if (errors.firstName) { %>is-invalid<% } %>"
+          />
+          <div class="invalid-feedback"><%= errors.firstName %></div>
+        </div>
+
+        <%# LAST NAME %>
+        <div class="form-group">
+          <label class="text-secondary" for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            value="<%= lastName %>"
+            class="form-control <% if (errors.lastName) { %>is-invalid<% } %>"
+          />
+          <div class="invalid-feedback"><%= errors.lastName %></div>
+        </div>
+
+        <%# USERNAME %>
+        <div class="form-group">
+          <label class="text-secondary" for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value="<%= username %>"
+            class="form-control <% if (errors.username) { %>is-invalid<% } %>"
+          />
+          <div class="invalid-feedback"><%= errors.username %></div>
+        </div>
+
+        <%# NEW PASSWORD %>
+        <div class="form-group">
+          <label class="text-secondary" for="newPassword">New Password</label>
+          <input
+            type="newPassword"
+            id="newPassword"
+            name="newPassword"
+            class="form-control <% if (errors.newPassword) { %>is-invalid<% } %>"
+          />
+          <div class="invalid-feedback"><%= errors.newPassword %></div>
+        </div>
+
+        <%# NEW PASSWORD CONFIRMATION %>
+        <div class="form-group">
+          <label class="text-secondary" for="newPwdConfirmation"
+            >New Password Confirmation</label
+          >
+          <input
+            type="password"
+            id="newPwdConfirmation"
+            name="newPwdConfirmation"
+            class="form-control <% if (errors.newPwdConfirmation) { %>is-invalid<% } %>"
+          />
+          <div class="invalid-feedback"><%= errors.newPwdConfirmation %></div>
+        </div>
+
+        <%# OLD PASSWORD %>
+        <div class="form-group">
+          <label class="text-secondary" for="password">New Password</label>
+          <input
+            type="password"
+            id="oldPassword"
+            name="oldPassword"
+            class="form-control <% if (errors.oldPassword) { %>is-invalid<% } %>"
+          />
+          <div class="invalid-feedback"><%= errors.oldPassword %></div>
+        </div>
+
+        <button type="submit" class="btn btn-block btn-primary mt-4">
+          Save
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

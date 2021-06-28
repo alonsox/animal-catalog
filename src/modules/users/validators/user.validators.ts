@@ -13,13 +13,16 @@ export interface SignUpErrors {
   readonly username: string;
   readonly email: string;
   readonly password: string;
+  readonly pwdConfirmation: string;
 }
 
-export interface UpdateErrors {
+export interface UpdateUserErrors {
   readonly firstName: string;
   readonly lastName: string;
   readonly username: string;
   readonly password: string;
+  readonly pwdConfirmation: string;
+  readonly oldPassword: string;
 }
 
 /*
@@ -110,53 +113,7 @@ const baseValidators = [
     .notEmpty()
     .withMessage(usernameErrors.isEmpty)
     .isLength({ min: minChars, max: maxChars })
-    .withMessage(usernameErrors.badLength)
-    .bail()
-    .custom(async (value: string) => {
-      if (await User.exists({ username: value })) {
-        throw new Error(usernameErrors.alreadyExists(value));
-      }
-    }),
-
-  // EMAIL
-  body('email')
-    .exists({ checkNull: true })
-    .withMessage(emailErrors.notExists)
-    .trim()
-    .notEmpty()
-    .withMessage(emailErrors.isEmpty)
-    .customSanitizer((x) => x.toLowerCase())
-    .isEmail({})
-    .withMessage(emailErrors.isInvalid)
-    .custom(async (value: string) => {
-      if (await User.exists({ email: value })) {
-        throw new Error(emailErrors.alreadyExists(value));
-      }
-    }),
-
-  // PASSWORD
-  body('password')
-    .exists({ checkNull: true })
-    .withMessage(passwordErrors.notExists)
-    .notEmpty()
-    .withMessage(passwordErrors.isEmpty)
-    .isLength({ min: pwdMinChars, max: pwdMaxChars })
-    .withMessage(passwordErrors.badLength),
-
-  // PASSWORD CONFIRMATION
-  body('pwdConfirmation')
-    .exists({ checkNull: true })
-    .withMessage(pwdConfirmationErrors.notExists)
-    .trim()
-    .notEmpty()
-    .withMessage(pwdConfirmationErrors.notExists)
-    .custom((value: string, { req }) => {
-      if (value !== req.body.password) {
-        throw new Error(pwdConfirmationErrors.itDoesNotMatch);
-      }
-
-      return true;
-    }),
+    .withMessage(usernameErrors.badLength),
 ];
 
 export function validateSignUp() {
@@ -170,15 +127,49 @@ export function validateSignUp() {
     }),
 
     // EMAIL
-    body('email').custom(async (value: string) => {
-      if (await User.exists({ email: value })) {
-        throw new Error(emailErrors.alreadyExists(value));
-      }
-    }),
+    body('email')
+      .exists({ checkNull: true })
+      .withMessage(emailErrors.notExists)
+      .trim()
+      .notEmpty()
+      .withMessage(emailErrors.isEmpty)
+      .customSanitizer((x) => x.toLowerCase())
+      .isEmail({})
+      .withMessage(emailErrors.isInvalid)
+      .custom(async (value: string) => {
+        if (await User.exists({ email: value })) {
+          throw new Error(emailErrors.alreadyExists(value));
+        }
+      }),
+
+    // PASSWORD
+    body('password')
+      .exists({ checkNull: true })
+      .withMessage(passwordErrors.notExists)
+      .trim()
+      .notEmpty()
+      .withMessage(passwordErrors.isEmpty)
+      .isLength({ min: pwdMinChars, max: pwdMaxChars })
+      .withMessage(passwordErrors.badLength),
+
+    // PASSWORD CONFIRMATION
+    body('pwdConfirmation')
+      .exists({ checkNull: true })
+      .withMessage(pwdConfirmationErrors.notExists)
+      .trim()
+      .notEmpty()
+      .withMessage(pwdConfirmationErrors.notExists)
+      .custom((value: string, { req }) => {
+        if (value !== req.body.password) {
+          throw new Error(pwdConfirmationErrors.itDoesNotMatch);
+        }
+
+        return true;
+      }),
   ];
 }
 
-export function validateUpdate() {
+export function validateUpdateUser() {
   return [
     ...baseValidators,
     // USERNAME
@@ -196,26 +187,53 @@ export function validateUpdate() {
     }),
 
     // PASSWORD
-    body('oldPassword').custom(async (value: string, { req }) => {
-      const userBeingUpdatedId = req.params?.id;
+    body('newPassword')
+      .if((value: string) => !!value.trim())
+      .trim()
+      .notEmpty()
+      .withMessage(passwordErrors.isEmpty)
+      .isLength({ min: pwdMinChars, max: pwdMaxChars })
+      .withMessage(passwordErrors.badLength),
 
-      try {
-        const existingUser = await User.findOne({ username: value });
-
-        if (!existingUser) {
-          throw new Error(oldPasswordErrors.isIncorrect);
+    // PASSWORD CONFIRMATION
+    body('newPwdConfirmation')
+      .if(body('newPassword').exists().trim().notEmpty())
+      .exists({ checkNull: true })
+      .withMessage(pwdConfirmationErrors.notExists)
+      .trim()
+      .notEmpty()
+      .withMessage(pwdConfirmationErrors.notExists)
+      .custom((value: string, { req }) => {
+        if (value !== req.body.newPassword) {
+          throw new Error(pwdConfirmationErrors.itDoesNotMatch);
         }
 
-        if (userBeingUpdatedId !== existingUser._id.toString()) {
-          throw new Error(oldPasswordErrors.isIncorrect);
-        }
+        return true;
+      }),
 
-        if (!(await comparePwd(value, existingUser.password))) {
+    // OLD PASSWORD
+    body('oldPassword')
+      .if(body('newPassword').exists().trim().notEmpty())
+      .custom(async (value: string, { req }) => {
+        const userBeingUpdatedId = req.params?.id;
+
+        try {
+          const existingUser = await User.findOne({ username: value });
+
+          if (!existingUser) {
+            throw new Error(oldPasswordErrors.isIncorrect);
+          }
+
+          if (userBeingUpdatedId !== existingUser._id.toString()) {
+            throw new Error(oldPasswordErrors.isIncorrect);
+          }
+
+          if (!(await comparePwd(value, existingUser.password))) {
+            throw new Error(oldPasswordErrors.isIncorrect);
+          }
+        } catch (err: any) {
           throw new Error(oldPasswordErrors.isIncorrect);
         }
-      } catch (err: any) {
-        throw new Error(oldPasswordErrors.isIncorrect);
-      }
-    }),
+      }),
   ];
 }
