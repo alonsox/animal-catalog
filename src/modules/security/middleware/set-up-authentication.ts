@@ -5,10 +5,11 @@ import {
   IVerifyOptions,
   Strategy as LocalStrategy,
 } from 'passport-local';
-import { comparePwd, userDocumentToDto, UserDto } from '../../users/utils';
 import { securityConfig } from '../security.config';
 import { User, UserDocument } from '../../users/models/user';
 import { UnknownError } from '../../shared/errors';
+import { UserDto, toUserDto } from '../../users/dto/user-dto';
+import { comparePwd } from '../../users/shared/hash-password';
 
 /** Type for the done function of passport */
 export type DoneFn = (
@@ -34,7 +35,7 @@ export const setUpAuthentication = () => {
 
   passport.deserializeUser((id: string, done) => {
     User.findById(id, (err: any, user: UserDocument) => {
-      done(err, userDocumentToDto(user));
+      done(err, toUserDto(user));
     });
   });
 
@@ -76,7 +77,7 @@ async function authenticateUser(
     }
 
     // All OK
-    return done(null, userDocumentToDto(user));
+    return done(null, toUserDto(user));
   } catch (err) {
     return done(new UnknownError('authentication error', err));
   }

@@ -1,6 +1,6 @@
-import { UpdateUserDto } from '../dto/edit-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
+import { UserDto, toUserDto } from '../dto/user-dto';
 import { User } from '../models/user';
-import { userDocumentToDto, UserDto } from '../utils';
 import { UserNotFoundError } from './user-not-found-error';
 
 export async function updateUser(
@@ -16,7 +16,7 @@ export async function updateUser(
 
     user.set(data);
 
-    return userDocumentToDto(await user.save());
+    return toUserDto(await user.save());
   } catch (err: any) {
     return new UserNotFoundError(userId);
   }

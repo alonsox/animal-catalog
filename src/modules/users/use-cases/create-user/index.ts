@@ -1,4 +1,4 @@
-export * from './create-user-dto';
+export * from '../../dto/create-user-dto';
 export * from './create-user';
 export * from './confirm-user';
-export * from './account.confirmation-dto';
+export * from '../../dto/account.confirmation-dto';

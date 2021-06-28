@@ -39,7 +39,7 @@ export class UserDto {
 }
 
 /** Converts a user document to a DTO */
-export function userDocumentToDto(user: UserDocument): UserDto {
+export function toUserDto(user: UserDocument): UserDto {
   return new UserDto({
     id: user.id,
     firstName: capitalizeFirst(user.firstName),

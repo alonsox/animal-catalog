@@ -1,4 +1,4 @@
-import { UserDto } from '../../utils';
+import { UserDto } from './user-dto';
 
 interface AccountConfirmationDtoProps {
   /** `true` if the user had already confirmed his/her account */

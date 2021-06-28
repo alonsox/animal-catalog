@@ -2,7 +2,7 @@ import { validationResult } from 'express-validator';
 import { NextFunction, Request, Response } from 'express';
 import { createUser } from '../../use-cases/create-user';
 import { getErrorMessages } from '../../../shared/utils';
-import { SignUpErrors } from '../../validators/sign-up';
+import { SignUpErrors } from '../../validators/user.validators';
 
 export function showSignUpForm(req: Request, res: Response) {
   if (req.user) {

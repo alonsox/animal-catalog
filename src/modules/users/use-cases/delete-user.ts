@@ -1,5 +1,5 @@
+import { UserDto, toUserDto } from '../dto/user-dto';
 import { User } from '../models/user';
-import { userDocumentToDto, UserDto } from '../utils';
 import { UserNotFoundError } from './user-not-found-error';
 
 export async function deleteUser(
@@ -12,7 +12,7 @@ export async function deleteUser(
       return new UserNotFoundError(userId);
     }
 
-    return userDocumentToDto(await user.remove());
+    return toUserDto(await user.remove());
   } catch (err: any) {
     return new UserNotFoundError(userId);
   }

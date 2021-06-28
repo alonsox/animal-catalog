@@ -1,4 +1,4 @@
-import { UserDto } from '../../modules/users/utils';
+import { UserDto } from '../../modules/users/dto/user-dto';
 
 declare namespace Express {
   export interface Request {

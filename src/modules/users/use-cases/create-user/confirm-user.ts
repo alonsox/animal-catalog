@@ -1,7 +1,7 @@
 import { User, UserDocument } from '../../models/user';
-import { userDocumentToDto } from '../../utils';
-import { AccountConfirmationDto } from './account.confirmation-dto';
+import { AccountConfirmationDto } from '../../dto/account.confirmation-dto';
 import { checkConfirmationCode } from './confirmation-code';
+import { toUserDto } from '../../dto/user-dto';
 
 const errorMessages = {
   noConfirmationCode: 'There is no confirmation code',
@@ -27,7 +27,7 @@ export async function confirmAccount(confirmationCode: string) {
   if (user.isActive) {
     return new AccountConfirmationDto({
       wasAlreadyActive: true,
-      user: userDocumentToDto(user),
+      user: toUserDto(user),
     });
   }
 
@@ -39,7 +39,7 @@ export async function confirmAccount(confirmationCode: string) {
 
   return new AccountConfirmationDto({
     wasAlreadyActive: false,
-    user: userDocumentToDto(user),
+    user: toUserDto(user),
   });
 }
 

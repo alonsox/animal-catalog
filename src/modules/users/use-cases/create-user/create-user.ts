@@ -1,9 +1,9 @@
 import { appConfig } from '../../../../app.config';
 import { sendEmailWithTemplate } from '../../../notifications/email';
-import { CreateUserDto } from './create-user-dto';
-import { userDocumentToDto, UserDto } from '../../utils';
+import { CreateUserDto } from '../../dto/create-user-dto';
+import { UserDto, toUserDto } from '../../dto/user-dto';
 import { User, UserDocument } from '../../models/user';
-import { hashPwd } from '../../utils/hash-password';
+import { hashPwd } from '../../shared/hash-password';
 import { createSecurityCode } from './confirmation-code';
 
 interface NewAccountEmailData {
@@ -22,7 +22,7 @@ export async function createUser(infoUsuario: CreateUserDto): Promise<UserDto> {
   // Send email
   sendConfirmationEmail(newUser);
 
-  return userDocumentToDto(newUser);
+  return toUserDto(newUser);
 }
 
 async function createUserDocument(

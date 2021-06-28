@@ -4,7 +4,7 @@ import {
   createNewAccount,
   showSignUpForm,
 } from '../controllers/sign-up';
-import { validateSignUp } from '../validators/sign-up';
+import { validateSignUp } from '../validators/user.validators';
 
 const usersRoutes = Router();
 
