@@ -1,11 +1,7 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { confirmAccount } from '../../use-cases/create-user';
 
-export async function checkAccountConfirmation(
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) {
+export async function checkAccountConfirmation(req: Request, res: Response) {
   const { confirmationCode } = req.params;
 
   if (!confirmationCode) {
@@ -23,7 +19,6 @@ export async function checkAccountConfirmation(
     });
   } catch (err) {
     renderConfirmationError(res);
-    next(err);
   }
 }
 
@@ -36,7 +31,7 @@ function renderConfirmationSuccess(
   res: Response,
   data: ConfirmationSuccessTemplate,
 ) {
-  res.render('sign-up/account-confirmation-success', {
+  res.render('users/sign-up/account-confirmation-success', {
     title: 'Congratulations',
     name: data.name || 'No name provided',
     wasAlreadyActive: data.wasAlreadyActive || false,
@@ -44,7 +39,7 @@ function renderConfirmationSuccess(
 }
 
 function renderConfirmationError(res: Response) {
-  res.render('sign-up/account-confirmation-error', {
+  res.render('users/sign-up/account-confirmation-error', {
     title: 'Account Confirmation Error',
   });
 }

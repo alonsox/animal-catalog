@@ -60,7 +60,7 @@ interface SignUpFormData {
 
 function renderSignUpForm(res: Response, data: SignUpFormData = {}) {
   // Render sign up form
-  res.render('sign-up/sign-up-form', {
+  res.render('users/sign-up/sign-up-form', {
     title: 'Sign Up',
     firstName: data.firstName || '',
     lastName: data.lastName || '',
@@ -79,7 +79,7 @@ function showConfirmationPending(
   res: Response,
   data: ConfirmationPendindData = {},
 ) {
-  res.render('sign-up/account-confirmation-pending', {
+  res.render('users/sign-up/account-confirmation-pending', {
     title: 'Sign Up',
     name: data.name || 'No named provided',
     email: data.email || 'Not email provided',
