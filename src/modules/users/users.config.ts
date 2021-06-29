@@ -6,7 +6,7 @@ export const usersConfig = {
   accountConfirmationSecret: process.env.ACCOUNT_CONFIRMATION_SECRET as string,
 
   /** Secret for the reset password's security code */
-  pwdResetSecret: process.env.PWD_RESET_SECRET,
+  pwdResetSecret: process.env.PWD_RESET_SECRET as string,
 
   /** Expiration time for a password reset (in seconds) */
   pwdResetExpirationTime: parseInt(

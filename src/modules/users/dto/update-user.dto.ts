@@ -3,5 +3,6 @@ export interface UpdateUserDto {
   firstName?: string;
   lastName?: string;
   username?: string;
+  /** The password raw */
   password?: string;
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../../partials/head-content.ejs') %>
+  </head>
+  <body>
+    <%- include('../../partials/navbar.ejs') %>
+    <div class="container-lg py-4 text-center" style="max-width: 500px">
+      <h1>Reset your password</h1>
+      <p class="mt-4">We have send you a password reset email to:</p>
+      <p><strong><%= email %></strong></p>
+      <div class="row">
+        <div class="col text-center">
+          <a href="/" class="btn btn-primary text-center" role="button"
+            >Go to main page
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

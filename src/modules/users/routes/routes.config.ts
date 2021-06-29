@@ -15,6 +15,11 @@ export const routes = {
 
   /** If no parameters, it computes the route for the router. */
   delete: (id?: string) => `/my-account/delete/${id || ':id'}`,
+
+  pwdReset: () => '/pwd-reset',
+
+  pwdResetConfirm: (userId?: string, securityToken?: string) =>
+    `/pwd-reset/${userId || ':userId'}/${securityToken || ':securityCode'}`,
 };
 
 export const userRouteOf = makeFullRoute(usersMountPoint);

@@ -37,15 +37,6 @@ export async function updateUser(
       return new UserNotFoundError(userId);
     }
 
-    // user.firstName = updateFields.firstName || user.firstName;
-    // user.lastName = updateFields.lastName || user.lastName;
-    // user.username = updateFields.username || user.username;
-    // if (updateFields.password) {
-    //   user.password = await hashPwd(updateFields.password);
-    // }
-
-    // Save changes
-    // TODO: usar findAndUpdate
     return toUserDto(userUpdated);
   } catch (err: any) {
     return new UserNotFoundError(userId);

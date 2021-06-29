@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../../partials/head-content.ejs') %>
+  </head>
+  <body>
+    <%- include('../../partials/navbar.ejs') %>
+    <div class="container-lg py-4 mx-auto" style="max-width: 500px">
+      <form action="" method="post" class="border px-3 py-4 rounded">
+        <h1 class="text-center">Password Reset</h1>
+
+        <!-- NEW PASSWORD -->
+        <div class="form-group">
+          <label class="text-secondary" for="newPassword">New password</label>
+          <input
+            type="password"
+            id="newPassword"
+            name="newPassword"
+            autocomplete="off"
+            value="<%= newPassword %>"
+            class="form-control"
+          />
+        </div>
+        <!-- PASSWORD CONFIRMATION  -->
+        <div class="form-group">
+          <label class="text-secondary" for="newPwdConfirmation"
+            >Confirm your new password</label
+          >
+          <input
+            type="password"
+            id="newPwdConfirmation"
+            name="newPwdConfirmation"
+            autocomplete="off"
+            value=""
+            class="form-control"
+          />
+        </div>
+        <!-- ERROR MESSAGE -->
+        <p class="mt-4 text-center text-danger"><%= errorMsg %></p>
+        <!-- SUBMIT BUTTON  -->
+        <button type="submit" class="mt-4 btn btn-block btn-primary">
+          Reset password
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
