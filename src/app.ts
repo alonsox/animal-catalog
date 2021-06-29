@@ -8,6 +8,8 @@ import {
 import { authRoutes } from './modules/security/routes';
 import { usersMountPoint, usersRoutes } from './modules/users/routes';
 import { catalogMountPoint, catalogRoutes } from './modules/animals/routes';
+import { NotFound } from './modules/shared/errors';
+import { errorHandler } from './modules/core/error.handler';
 
 const app = express();
 
@@ -39,5 +41,11 @@ app.get('/', (_, res) => res.render('home', { title: 'Animal Catalog' }));
 app.use('/auth', authRoutes);
 app.use(usersMountPoint, usersRoutes);
 app.use(catalogMountPoint, catalogRoutes);
+
+/*
+ * ERROR HANDLER
+ */
+app.use((req, res, next) => next(new NotFound('Not Found')));
+app.use(errorHandler);
 
 export { app };
