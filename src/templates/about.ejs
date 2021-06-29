@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/head-content') %>
+    <link rel="stylesheet" href="/css/about.css" />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+    <div class="container-lg py-5 mb-5" style="max-width: 800px">
+      <h1 class="mb-4">What is this project?</h1>
+      <p>
+        This is a portfolio project of a CRUD (Create, Read, Update and Delete)
+        aplication with a simple authentication and a authorization system. The
+        theme of the app is a simple animal catalog to demonstrate CRUD
+        capabilities.
+      </p>
+
+      <p>
+        You can find the source code for this project right
+        <a href="https://github.com/alonsox/animal-catalog" target="_blank"
+          >here</a
+        >
+        in case you are interested.
+      </p>
+
+      <h2 class="mt-4 mb-2">The catalog</h2>
+
+      <p>The animal catalog contains the following sections:</p>
+
+      <ul>
+        <li>
+          <strong>Animals</strong>: contains the list of animals currently in
+          the application.
+        </li>
+        <li>
+          <a
+            href="https://en.wikipedia.org/wiki/Class_(biology)"
+            target="_blank"
+            >Class</a
+          >
+          : Information about the taxonomical class of the animal.
+        </li>
+
+        <li>
+          <a
+            href="https://en.wikipedia.org/wiki/Family_(biology)"
+            target="_blank"
+            >Family</a
+          >:Information about the taxonomical family of the animal.
+        </li>
+
+        <li>
+          <a
+            href="https://en.wikipedia.org/wiki/Conservation_status"
+            target="_blank"
+            >Conservation status</a
+          >: Information about the conservation status of the animal.
+        </li>
+      </ul>
+
+      <p>
+        To access any of this section you will need to have an account, so if
+        you don't have one right one you can create it
+        <a href="/users/sign-up" target="_blank">here</a>.
+      </p>
+
+      <p>
+        Once you have access to your account the sections will appear in the top
+        navigation bar just like in the following picture
+      </p>
+
+      <figure class="my-3">
+        <img src="/img/about/top-navigation-bar.png" alt="Top navigation bar" />
+        <figcaption class="text-center p-2">
+          Access to the animal catalog at the left of the navigation bar.
+        </figcaption>
+      </figure>
+
+      <p>
+        As a normal user you will only have access to the list of items in each
+        section, be it animals, classes, families or conservation statuses, as
+        well as the details of each one of them, but you have to be an
+        administrator user in order to be able to create, update and/or delete
+        any of them.
+      </p>
+
+      <h2 class="mt-5 mb-4">User support</h2>
+      <h3 class="mb-2">Creating an acccount</h3>
+      <p>
+        You can create you user account from
+        <a href="/users/sign-up" target="_blank">here</a> or by going directly
+        to the sign up page by clicking the link in the top navigation bar,
+        which is shown in the following image:
+      </p>
+
+      <figure class="my-3">
+        <img src="/img/about/access-to-sign-in.png" alt="Access to sign in" />
+        <figcaption class="text-center p-2">
+          Sign up button at top-right of the navigation bar.
+        </figcaption>
+      </figure>
+
+      <p>In there you will need to enter the following information:</p>
+
+      <ul>
+        <li>Your first and last name,</li>
+        <li>Your email,</li>
+        <li>A username,</li>
+        <li>And of course, a password.</li>
+      </ul>
+
+      <p>
+        Once you complete and send the form, an account will be "reserved" and
+        you will receive an email with a confirmation link to active your
+        account. You will have 2 hours to confirm your new account, so if don't
+        do it within that 2 hours the account you just created will be deleted
+        and you will have to repeat the whole process all over again, so keep
+        that in mind.
+      </p>
+
+      <h3 class="mt-4 mb-2">Account details</h3>
+
+      <p>
+        To change some of your account details you can go to your account
+        information by clicking in the <strong>My account</strong> section that
+        is shown in the following image, under your name.
+      </p>
+
+      <figure class="my-3">
+        <img
+          src="/img/about/going-to-account-details.png"
+          alt="Going to account details"
+        />
+        <figcaption class="text-center p-2">
+          Access to your account by clicking on yout name at the right of the
+          navigationo bar
+        </figcaption>
+      </figure>
+
+      <p>
+        Once you click there you will find the following form to update your
+        information. For the moment is not possible to change your email,
+        therefore the only fields you can update are your name, username and
+        password.
+      </p>
+
+      <figure class="my-3 text-center">
+        <img
+          style="max-width: 500px"
+          src="/img/about/edit-account.png"
+          alt="Edit account"
+        />
+        <figcaption class="text-center p-2">Edit account form.</figcaption>
+      </figure>
+
+      <p>
+        Notice that in this form at the bottom you have the possibility to
+        delete your account if that is what you want, but be careful, once you
+        delete your account you won't be able to recover it later.
+      </p>
+
+      <h3 class="mt-4 mb-2">Reseting my password</h3>
+
+      <p>
+        If you forgot your password just go to the
+        <a href="/auth/log-in" target="_blank">log-in page</a> and look for the
+        link <em>Forgot password?</em> to start the process of reseting your
+        password, just like in the image below.
+      </p>
+
+      <figure class="my-3 text-center">
+        <img
+          style="max-width: 500px"
+          src="/img/about/forgot-pwd.png"
+          alt="Access password reset"
+        />
+        <figcaption class="text-center p-2">
+          Click on the <em>Forgot password?</em> link to start the password
+          reset process.
+        </figcaption>
+      </figure>
+
+      <figure class="my-3 text-center">
+        <img
+          style="max-width: 500px"
+          src="/img/about/pwd-reset-send-email.png"
+          alt="Password reset send email form"
+        />
+        <figcaption class="text-center p-2 pt-0">
+          Enter your email to receive the password reset link.
+        </figcaption>
+      </figure>
+
+      <p>
+        Once you click the link you will need to enter your email to receive the
+        password reset link. Once you receive the email you will need click that
+        link and just complete the process of reseting your password.
+      </p>
+
+      <p>
+        Keep in mind that you will only have 2 hours to complete the password
+        reset process.
+      </p>
+
+      <h2 class="mt-5 mb-3">FAQ</h2>
+      <div class="accordion" id="faq-accordion">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <button
+                class="btn btn-link btn-block text-left collapsed"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseOne"
+                aria-expanded="false"
+                aria-controls="collapseOne"
+              >
+                How do I become an administrator user?
+              </button>
+            </h2>
+          </div>
+
+          <div
+            id="collapseOne"
+            class="collapse show"
+            aria-labelledby="headingOne"
+            data-parent="#faq-accordion"
+          >
+            <div class="card-body">You can't right now.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+              <button
+                class="btn btn-link btn-block text-left collapsed"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                Can an administrator user or other users access to my account
+                details?
+              </button>
+            </h2>
+          </div>
+          <div
+            id="collapseTwo"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#faq-accordion"
+          >
+            <div class="card-body">
+              No. Only you, the owner of the account, can access that
+              information, not even an administrator.
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+              <button
+                class="btn btn-link btn-block text-left collapsed"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                How much of this information is real?
+              </button>
+            </h2>
+          </div>
+          <div
+            id="collapseThree"
+            class="collapse"
+            aria-labelledby="headingThree"
+            data-parent="#faq-accordion"
+          >
+            <div class="card-body">
+              Since this is a just a portfolio project, take everything with a
+              grain of salt. The testimonials and features are only there for an
+              aesthetical purpose, but in a real project they would include
+              actual information about the organization. Information of the
+              animals will be usuarlly true.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

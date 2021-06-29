@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 /*
  * ROUTES
  */
-app.get(coreMountPoint, coreRoutes);
+app.use(coreMountPoint, coreRoutes);
 app.use('/auth', authRoutes);
 app.use(usersMountPoint, usersRoutes);
 app.use(catalogMountPoint, catalogRoutes);
