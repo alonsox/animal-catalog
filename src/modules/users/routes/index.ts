@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { authorize } from '../../security/middleware/authorization.middleware';
 import { handleDeleteUser } from '../controllers/delete-user.controller';
 import {
   handlePasswordReset,
@@ -40,11 +41,21 @@ usersRoutes.route(routes.confirmAccount()).get(checkAccountConfirmation);
 /**
  * ACCOUNT MANAGEMENT
  */
-usersRoutes.route(routes.delete()).post(handleDeleteUser);
+usersRoutes
+  .route(routes.delete())
+  .post(authorize({ onlyOwnUser: true }), handleDeleteUser);
 
-usersRoutes.route(routes.update()).post(validateUpdateUser(), handleUpdateUser);
+usersRoutes
+  .route(routes.update())
+  .post(
+    authorize({ onlyOwnUser: true }),
+    validateUpdateUser(),
+    handleUpdateUser,
+  );
 
-usersRoutes.route(routes.getDetails()).get(showMyAccountDetailsForm);
+usersRoutes
+  .route(routes.getDetails())
+  .get(authorize({ onlyOwnUser: true }), showMyAccountDetailsForm);
 
 /**
  * PASSWORD RESET

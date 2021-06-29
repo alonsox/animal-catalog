@@ -8,6 +8,9 @@ export const authorizationErrors = {
 export interface AuthorizationOptions {
   /** `true` to restrict the route access only to an admin user */
   onlyAdmin?: boolean;
+
+  /** `true` so only the user itself can access that route */
+  onlyOwnUser?: boolean;
 }
 
 /**
@@ -21,6 +24,11 @@ export function authorize(options: AuthorizationOptions) {
     next: NextFunction,
   ) {
     if (!req.user) {
+      next(new ForbiddenError(authorizationErrors.notAuthorized));
+      return;
+    }
+
+    if (options.onlyOwnUser && req.params?.id !== (req.user as any).id) {
       next(new ForbiddenError(authorizationErrors.notAuthorized));
       return;
     }
