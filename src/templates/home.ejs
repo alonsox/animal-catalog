@@ -2,20 +2,18 @@
 <html lang="en">
   <head>
     <%- include('partials/head-content') %>
+    <link rel="stylesheet" href="/css/home-page.css" />
   </head>
-  <style>
-    .main-img {
-      max-width: 400px;
-      width: 100%;
-      height: auto;
-    }
-  </style>
   <body>
     <%- include('partials/navbar') %> <%# JUMBOTRON %>
     <div class="jumbotron jumbotron-fluid bg-warning">
       <div class="container-lg d-flex justify-content-between flex-wrap my-3">
         <div>
+          <% if (currentUser) { %>
+          <h1 class="display-4">Welcome back, <%= currentUser.firstName %>!</h1>
+          <% } else { %>
           <h1 class="display-3">Animal Catalog</h1>
+          <% } %>
           <p class="lead">
             The place with everything you need to know about animals
           </p>
@@ -25,6 +23,45 @@
         </div>
       </div>
     </div>
-    <%# REVIEWS %>
+
+    <%# FEATURES %>
+    <div class="container-lg mt-4">
+      <div class="row py-3 pb-5">
+        <% features.forEach(feature => { %>
+        <div class="col-sm-12 col-md-4 py-2 text-center">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title mb-4"><%= feature.title %></h3>
+              <p class="card-text"><%= feature.description %></p>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <%# TESTIMONIALS %>
+    <div class="container-lg mt-5">
+      <h1 class="text-center">Testimonials</h1>
+      <div class="row py-3 pb-5">
+        <% testimonials.forEach((testimonial, index) => { %>
+        <div class="col-sm-12 col-md-6 col-lg-4 py-2 text-center">
+          <div class="card">
+            <div class="image-cropper mx-auto mt-3">
+              <img
+                class="profile-pic"
+                alt="Author Profile Picture"
+                src="<%= testimonial.authorPic %> "
+              />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><%= testimonial.author %></h5>
+              <p class="card-text">"<%= testimonial.content %>"</p>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
   </body>
 </html>

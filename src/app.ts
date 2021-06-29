@@ -1,15 +1,16 @@
 import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
-import {
-  setCurrentUser,
-  setUpAuthentication,
-} from './modules/security/middleware';
 import { authRoutes } from './modules/security/routes';
 import { usersMountPoint, usersRoutes } from './modules/users/routes';
 import { catalogMountPoint, catalogRoutes } from './modules/animals/routes';
 import { NotFound } from './modules/shared/errors';
 import { errorHandler } from './modules/core/error.handler';
+import { coreMountPoint, coreRoutes } from './modules/core/routes';
+import {
+  setCurrentUser,
+  setUpAuthentication,
+} from './modules/security/middleware';
 
 const app = express();
 
@@ -37,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 /*
  * ROUTES
  */
-app.get('/', (_, res) => res.render('home', { title: 'Animal Catalog' }));
+app.get(coreMountPoint, coreRoutes);
 app.use('/auth', authRoutes);
 app.use(usersMountPoint, usersRoutes);
 app.use(catalogMountPoint, catalogRoutes);
