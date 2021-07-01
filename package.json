@@ -4,9 +4,11 @@
   "description": "Project ready to start working on a backend project with express and typescript",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node -r dotenv/config build/server.js",
+    "start": "node build/server.js",
+    "start:dev": "node -r dotenv/config build/server.js",
     "dev": "nodemon",
-    "build": "tsc",
+    "build": "tsc && cp -r src/public build/public && cp -r src/templates build/templates && rm -rf src",
+    "build:dev": "tsc && cp -r src/public build/public && cp -r src/templates build/templates",
     "test": "jest --runInBand --watchAll --verbose",
     "lint": "eslint . --ext .js,.ts --fix",
     "format": "prettier \"src/**/*.ts\""
