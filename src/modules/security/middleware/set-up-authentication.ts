@@ -1,5 +1,6 @@
 import session from 'express-session';
 import passport from 'passport';
+import MongoStore from 'connect-mongo';
 import {
   IStrategyOptions,
   IVerifyOptions,
@@ -10,6 +11,7 @@ import { User, UserDocument } from '../../users/models/user';
 import { UnknownError } from '../../shared/errors';
 import { UserDto, toUserDto } from '../../users/dto/user-dto';
 import { comparePwd } from '../../users/shared/hash-password';
+import { dbConfig } from '../../../db';
 
 /** Type for the done function of passport */
 export type DoneFn = (
@@ -46,6 +48,10 @@ export const setUpAuthentication = () => {
       secret: securityConfig.authSecret,
       resave: false,
       saveUninitialized: true,
+      store: MongoStore.create({
+        mongoUrl: dbConfig.uri,
+        ttl: 14 * 24 * 60 * 60,
+      }),
     }),
     passport.initialize(),
     passport.session(),
