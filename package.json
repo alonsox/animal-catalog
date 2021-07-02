@@ -1,14 +1,18 @@
 {
-  "name": "typescript-backend-base",
+  "name": "animal-catalog",
   "version": "1.0.0",
-  "description": "Project ready to start working on a backend project with express and typescript",
+  "description": "An animal catalog built with typescript and express",
   "main": "index.js",
+  "engines": { 
+    "node": "14.x" 
+  },
   "scripts": {
     "start": "node build/server.js",
     "start:dev": "node -r dotenv/config build/server.js",
     "dev": "nodemon",
-    "build": "tsc && cp -r src/public build/public && cp -r src/templates build/templates && rm -rf src",
-    "build:dev": "tsc && cp -r src/public build/public && cp -r src/templates build/templates",
+    "build": "npm run build:dev && rm -rf src",
+    "build:dev": "tsc && npm run copy-static-files",
+    "copy-static-files": "cp -r src/public build/public && cp -r src/templates build/templates && cp -r src/modules/notifications/email/templates/ build/modules/notifications/email/templates/",
     "test": "jest --runInBand --watchAll --verbose",
     "lint": "eslint . --ext .js,.ts --fix",
     "format": "prettier \"src/**/*.ts\""
