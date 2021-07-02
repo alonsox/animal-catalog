@@ -1,6 +1,8 @@
 import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
+import helmet from 'helmet';
+import compression from 'compression';
 import { authRoutes } from './modules/security/routes';
 import { usersMountPoint, usersRoutes } from './modules/users/routes';
 import { catalogMountPoint, catalogRoutes } from './modules/animals/routes';
@@ -30,6 +32,8 @@ app.use(setUpAuthentication());
 app.use(setCurrentUser());
 
 // Other middleware
+app.use(helmet());
+app.use(compression());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
