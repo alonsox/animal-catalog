@@ -43,19 +43,25 @@ usersRoutes.route(routes.confirmAccount()).get(checkAccountConfirmation);
  */
 usersRoutes
   .route(routes.delete())
-  .post(authorize({ onlyOwnUser: true }), handleDeleteUser);
+  .post(
+    authorize({ disallowTestUser: true, onlyOwnUser: true }),
+    handleDeleteUser,
+  );
 
 usersRoutes
   .route(routes.update())
   .post(
-    authorize({ onlyOwnUser: true }),
+    authorize({ disallowTestUser: true, onlyOwnUser: true }),
     validateUpdateUser(),
     handleUpdateUser,
   );
 
 usersRoutes
   .route(routes.getDetails())
-  .get(authorize({ onlyOwnUser: true }), showMyAccountDetailsForm);
+  .get(
+    authorize({ disallowTestUser: true, onlyOwnUser: true }),
+    showMyAccountDetailsForm,
+  );
 
 /**
  * PASSWORD RESET

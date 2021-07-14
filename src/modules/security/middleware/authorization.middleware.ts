@@ -11,6 +11,9 @@ export interface AuthorizationOptions {
 
   /** `true` so only the user itself can access that route */
   onlyOwnUser?: boolean;
+
+  /** `true` to disallow the test user access to this route. */
+  disallowTestUser?: boolean;
 }
 
 /**
@@ -24,6 +27,11 @@ export function authorize(options: AuthorizationOptions) {
     next: NextFunction,
   ) {
     if (!req.user) {
+      next(new ForbiddenError(authorizationErrors.notAuthorized));
+      return;
+    }
+
+    if (options.disallowTestUser && (req.user as any).username === 'testuser') {
       next(new ForbiddenError(authorizationErrors.notAuthorized));
       return;
     }
