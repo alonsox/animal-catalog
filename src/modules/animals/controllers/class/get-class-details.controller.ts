@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { NotFound, UnknownError } from '../../../shared/errors';
 import { capitalizeAll } from '../../../shared/utils/formatters';
+import { markdownToHTML } from '../../../shared/utils/markdown';
 import { classRoutes, fullRouteOf } from '../../routes/routes.config';
 import { ClassNotFoundError } from '../../use-cases/class/errors/class-not-found';
 import { getClass } from '../../use-cases/class/get-class';
@@ -21,9 +22,10 @@ export async function showClassDetails(
     }
 
     // OK
+
     renderClassDetailsPage(res, {
       name: capitalizeAll(result.name),
-      description: result.description,
+      description: markdownToHTML(result.description),
       updateUrl: fullRouteOf(classRoutes.update(result.id)),
       deleteUrl: fullRouteOf(classRoutes.delete(result.id)),
     });

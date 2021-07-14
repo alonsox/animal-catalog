@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { NotFound, UnknownError } from '../../../shared/errors';
 import { capitalizeAll, toUpper } from '../../../shared/utils/formatters';
+import { markdownToHTML } from '../../../shared/utils/markdown';
 import { conStatusesRoutes, fullRouteOf } from '../../routes/routes.config';
 import { ConservationStatusNotFoundError } from '../../use-cases/conservation-status/conservation-status-not-found-error';
 import { getConservationStatus } from '../../use-cases/conservation-status/get-conservation-status';
@@ -24,7 +25,7 @@ export async function showConservationStatusDetails(
     renderStatusDetailsPage(res, {
       name: capitalizeAll(result.name),
       abbreviation: toUpper(result.abbreviation),
-      description: result.description,
+      description: markdownToHTML(result.description),
       updateUrl: fullRouteOf(conStatusesRoutes.update(result.id)),
     });
   } catch (err: any) {

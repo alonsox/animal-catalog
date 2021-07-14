@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { NotFound, UnknownError } from '../../../shared/errors';
 import { capitalizeAll, toLower } from '../../../shared/utils/formatters';
+import { markdownToHTML } from '../../../shared/utils/markdown';
 import { AnimalDto } from '../../dto/animal/animal.dto';
 import { animalRoutes, fullRouteOf } from '../../routes/routes.config';
 import { AnimalNotFoundError } from '../../use-cases/animal/animal-not-found-error';
@@ -64,7 +65,7 @@ async function toAnimalDetails(animal: AnimalDto): Promise<AnimalDetailsData> {
   return {
     name: capitalizeAll(animal.name),
     scientificName: toLower(animal.scientificName),
-    description: animal.description,
+    description: markdownToHTML(animal.description),
     phtoSrc: animal.photoSrc,
     className: capitalizeAll(className),
     familyName: capitalizeAll(familyName),

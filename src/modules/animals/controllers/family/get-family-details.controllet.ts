@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { NotFound, UnknownError } from '../../../shared/errors';
 import { capitalizeAll } from '../../../shared/utils/formatters';
+import { markdownToHTML } from '../../../shared/utils/markdown';
 import { familyRoutes, fullRouteOf } from '../../routes/routes.config';
 import { FamilyNotFoundError } from '../../use-cases/family/errors/family-not-found-error';
 import { getFamily } from '../../use-cases/family/get-family';
@@ -23,7 +24,7 @@ export async function showFamilyDetails(
     // OK
     renderFamilyDetailsPage(res, {
       name: capitalizeAll(result.name),
-      description: result.description,
+      description: markdownToHTML(result.description),
       updateUrl: fullRouteOf(familyRoutes.update(result.id)),
       deleteUrl: fullRouteOf(familyRoutes.delete(result.id)),
     });
