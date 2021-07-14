@@ -27,7 +27,7 @@ const features: Feature[] = [
   {
     title: 'Constant updates',
     description:
-      'We update our animals database every day adding more animals or adding the mosto recent discoveries arround them.',
+      'We update our animals database every day adding more animals or adding the most recent discoveries arround them.',
   },
 ];
 
