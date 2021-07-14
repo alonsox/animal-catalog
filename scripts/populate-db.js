@@ -10,7 +10,7 @@ const {
   ConservationStatus,
 } = require('./animal.models');
 
-const DEBUG = false;
+const DEBUG = true;
 console.log('Starting DB Population...');
 
 // CONNECT TO DB
